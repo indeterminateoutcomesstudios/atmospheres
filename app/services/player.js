@@ -5,9 +5,20 @@ import config from 'ms-environments/config/environment';
 
 export default Ember.Service.extend({
 
+  masterVolume: Ember.computed({
+    get() {
+      return this.masterGain.gain.value;
+    },
+    set(key, value) {
+      this.masterGain.gain.value = value;
+    }
+  }),
+
   init() {
     let AudioContext = window.AudioContext || window.webkitAudioContext;
     this.context = new AudioContext();
+    this.masterGain = this.context.createGain();
+    this.masterGain.connect(this.context.destination);
   },
 
   play(sound) {
@@ -20,7 +31,7 @@ export default Ember.Service.extend({
         let source = this.context.createBufferSource();
         source.buffer = buffer;
         source.loop = true;
-        source.connect(this.context.destination);
+        source.connect(this.masterGain);
         source.start(0);
         sound.setProperties({ playing: true, source });
       });
