@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import fetch from 'fetch';
 
 import config from 'ms-environments/config/environment';
 
@@ -19,17 +20,10 @@ export default Ember.Service.extend({
   },
 
   _loadSound(sound) {
-    let url = config.soundsURL + sound.url;
-    return new Ember.RSVP.Promise((resolve, reject) => {
-      let request = new XMLHttpRequest();
-      request.open('GET', url, true);
-      request.responseType = 'arraybuffer';
-
-      request.onload = () => {
-        this.context.decodeAudioData(request.response, resolve, reject);
-      };
-      request.send();
-    });
+    return new Ember.RSVP.Promise((resolve, reject) =>
+      fetch(config.soundsURL + sound.url)
+        .then(res => res.arrayBuffer())
+        .then(res => this.context.decodeAudioData(res, resolve, reject)));
   }
 
 });
