@@ -8,6 +8,9 @@
 /node_modules
 /bower_components
 
+# sounds folder
+/public/sounds/*
+
 # misc
 /.sass-cache
 /connect.lock
