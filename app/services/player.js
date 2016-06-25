@@ -16,24 +16,34 @@ export default Ember.Service.extend({
 
   init() {
     let AudioContext = window.AudioContext || window.webkitAudioContext;
-    this.context = new AudioContext();
-    this.masterGain = this.context.createGain();
-    this.masterGain.connect(this.context.destination);
+    let context = new AudioContext();
+    this.masterGain = context.createGain();
+    this.masterGain.connect(context.destination);
+    this.set('context', context);
   },
 
   play(sound) {
     let source = sound.get('source');
     if (source && sound.get('playing')) {
       source.stop();
-      sound.setProperties({ playing: false, source: null });
+      source.disconnect();
+      sound.setProperties({
+        playing: false,
+        source: null
+      });
     } else {
       this._loadSound(sound).then(buffer => {
-        let source = this.context.createBufferSource();
+        let source = this.context.createBufferSource(),
+            gain = sound.get('gain');
         source.buffer = buffer;
         source.loop = true;
-        source.connect(this.masterGain);
+        source.connect(gain);
+        gain.connect(this.masterGain);
         source.start(0);
-        sound.setProperties({ playing: true, source });
+        sound.setProperties({
+          playing: true,
+          source
+        });
       });
     }
   },

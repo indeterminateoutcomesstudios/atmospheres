@@ -12,6 +12,10 @@
 <p>Sounds</p>
 <ul>
   {{#each model.sounds as |sound|}}
-    <li {{action 'play' sound}}>{{sound.name}} ({{sound.playing}})</li>
+    <li>
+      {{sound.name}}
+      <a href {{action 'play' sound}}>{{if sound.playing 'Stop' 'Play'}}</a>
+      <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
+    </li>
   {{/each}}
 </ul>

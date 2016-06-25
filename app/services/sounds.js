@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
+import Sound from 'ms-environments/models/sound';
+
 export default Ember.Service.extend({
+
+  player: Ember.inject.service(),
 
   getSounds() {
     let soundStubs = [
@@ -16,7 +20,7 @@ export default Ember.Service.extend({
       { name: 'Waterfall (Large)' }
 
     ];
-    return soundStubs.map(s => Ember.Object.create(s));
+    return soundStubs.map(s => Sound.create({ ...s, context: this.get('player.context') }));
   },
 
   getEnvironments() {
