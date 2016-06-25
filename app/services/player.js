@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import fetch from 'fetch';
 
 export default Ember.Service.extend({
 
@@ -28,7 +27,8 @@ export default Ember.Service.extend({
     }
   },
 
-  playEnvironment(allSounds, { sounds }) {
+  playEnvironment(allSounds, environment) {
+    let sounds = environment.get('sounds');
     allSounds.forEach(s => {
       let soundInEnvironment = sounds.findBy('name', s.get('name'));
       if (soundInEnvironment) {

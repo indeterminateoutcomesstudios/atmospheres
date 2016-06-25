@@ -49,7 +49,7 @@ export default Ember.Object.extend({
     });
   },
 
-  _loadSound(sound) {
+  _loadSound() {
     return new Ember.RSVP.Promise((resolve, reject) =>
       fetch(config.soundsURL + this.get('url'))
         .then(res => res.arrayBuffer())

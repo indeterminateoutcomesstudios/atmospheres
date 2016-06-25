@@ -20,7 +20,7 @@ export default Ember.Service.extend({
       { name: 'Waterfall (Large)' }
 
     ];
-    return soundStubs.map(s => Sound.create({ ...s, context: this.get('player.context') }));
+    return Ember.A(soundStubs.map(s => Sound.create({ ...s, context: this.get('player.context') })));
   },
 
   getEnvironments() {

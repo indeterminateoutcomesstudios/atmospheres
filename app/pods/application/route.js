@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   model() {
     return Ember.RSVP.hash({
       sounds: this.get('sounds').getSounds(),
-      environments: this.get('sounds').getEnvironments()
+      environments: this.store.findAll('environment')
     });
   },
 
@@ -17,13 +17,21 @@ export default Ember.Route.extend({
       this.get('player').play(sound);
     },
     createEnvironment() {
-      let model = this.modelFor(this.routeName);
+      let model = this.modelFor(this.routeName),
+          name = window.prompt('Name this environment:');
 
-      model.environments.pushObject({
-        name: '(New Environment)',
+      if (!name) {
+        return;
+      }
+
+      this.store.createRecord('environment', {
+        name,
         sounds: model.sounds.filterBy('playing')
           .map(s => s.getProperties('name', 'volume'))
-      });
+      }).save();
+    },
+    deleteEnvironment(environment) {
+      environment.destroyRecord();
     },
     playEnvironment(environment) {
       // HACK: The 'player' service doesn't know about all the playing sounds,
