@@ -2,6 +2,10 @@
 
 {{input type='range' min=0 max=1 step=0.01 value=player.masterVolume}}
 
+{{#if playingSounds.length}}
+  <a href {{action 'stopAll'}}>Stop</a>
+{{/if}}
+
 <p>Environments <a href {{action 'createEnvironment'}}>+</a></p>
 <ul>
   {{#each model.environments as |environment|}}

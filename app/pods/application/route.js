@@ -16,6 +16,10 @@ export default Ember.Route.extend({
     play(sound) {
       this.get('player').play(sound);
     },
+    stopAll() {
+      let model = this.modelFor(this.routeName);
+      model.sounds.filterBy('playing').forEach(s => s.stop());
+    },
     createEnvironment() {
       let model = this.modelFor(this.routeName),
           name = window.prompt('Name this environment:');
