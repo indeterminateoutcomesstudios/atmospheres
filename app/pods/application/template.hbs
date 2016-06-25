@@ -2,11 +2,12 @@
 
 {{input type='range' min=0 max=1 step=0.01 value=player.masterVolume}}
 
-<p>Collections</p>
+<p>Environments</p>
 <ul>
-  {{#each model.collections as |collection|}}
-    <li>{{collection.name}}</li>
+  {{#each model.environments as |environment|}}
+    <li><a href {{action 'playEnvironment' environment}}>{{environment.name}}</a></li>
   {{/each}}
+  <li><a href {{action 'createEnvironment'}}>Create Environment</a></li>
 </ul>
 
 <p>Sounds</p>

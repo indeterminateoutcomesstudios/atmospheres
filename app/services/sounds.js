@@ -24,7 +24,7 @@ export default Ember.Service.extend({
   },
 
   getEnvironments() {
-    return [];
+    return Ember.A();
   }
 
 });
