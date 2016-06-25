@@ -11,12 +11,20 @@ export default Ember.Service.extend({
   },
 
   play(sound) {
-    this._loadSound(sound).then(buffer => {
-      let source = this.context.createBufferSource();
-      source.buffer = buffer;
-      source.connect(this.context.destination);
-      source.start(0);
-    });
+    let source = sound.get('source');
+    if (source && sound.get('playing')) {
+      source.stop();
+      sound.setProperties({ playing: false, source: null });
+    } else {
+      this._loadSound(sound).then(buffer => {
+        let source = this.context.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        source.connect(this.context.destination);
+        source.start(0);
+        sound.setProperties({ playing: true, source });
+      });
+    }
   },
 
   _loadSound(sound) {

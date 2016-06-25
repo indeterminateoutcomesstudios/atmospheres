@@ -10,6 +10,6 @@
 <p>Sounds</p>
 <ul>
   {{#each model.sounds as |sound|}}
-    <li {{action 'play' sound}}>{{sound.name}}</li>
+    <li {{action 'play' sound}}>{{sound.name}} ({{sound.playing}})</li>
   {{/each}}
 </ul>
