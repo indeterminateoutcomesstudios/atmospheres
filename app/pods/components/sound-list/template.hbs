@@ -1,28 +1,30 @@
 <ul>
-  {{#if playingSounds.length}}
-    <fieldset>
-      <legend class="em">Now Playing</legend>
-      <ul>
-        {{#each playingSounds as |sound|}}
-          <li>
-            <a href {{action (action onPlay sound)}} class="{{if sound.playing 'active'}}">{{sound.name}}</a>
-            <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
-          </li>
-        {{/each}}
-      </ul>
-    </fieldset>
-  {{/if}}
   {{#each categories as |category|}}
-    <fieldset>
-      <legend>{{category.value}}</legend>
-      <ul>
-        {{#each category.items as |sound|}}
-          <li>
-            <a href {{action (action onPlay sound)}} class="{{if sound.playing 'active'}}">{{sound.name}}</a>
-            <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
-          </li>
-        {{/each}}
-      </ul>
-    </fieldset>
+    <li>
+      <fieldset>
+        <legend>{{category.value}}</legend>
+        <ul>
+          {{#each category.items as |sound|}}
+            <li>
+              <a href {{action (action onPlay sound)}} class="{{if sound.playing 'active'}}">{{sound.name}}</a>
+              <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
+            </li>
+          {{/each}}
+        </ul>
+      </fieldset>
+    </li>
   {{/each}}
 </ul>
+{{#if playingSounds.length}}
+  <fieldset>
+    <legend class="em">Now Playing</legend>
+    <ul>
+      {{#each playingSounds as |sound|}}
+        <li>
+          <a href {{action (action onPlay sound)}} class="{{if sound.playing 'active'}}">{{sound.name}}</a>
+          <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
+        </li>
+      {{/each}}
+    </ul>
+  </fieldset>
+{{/if}}

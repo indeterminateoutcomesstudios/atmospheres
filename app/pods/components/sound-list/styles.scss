@@ -1,5 +1,10 @@
+& {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 fieldset {
-  margin-bottom: $spacing-normal;
   background: white;
   border: 1px solid $color-foreground;
   border-radius: $spacing-normal;
@@ -13,7 +18,8 @@ legend {
 
   border-bottom: 1px solid $color-foreground;
 
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
 
   &.em {
     font-weight: bold;
@@ -28,6 +34,15 @@ fieldset ul {
 
   font-size: 1.3rem;
   font-weight: lighter;
+}
+
+> ul {
+  overflow-y: auto;
+  margin-bottom: $spacing-normal;
+}
+
+> ul > li + li {
+  margin-top: $spacing-normal;
 }
 
 .active {
