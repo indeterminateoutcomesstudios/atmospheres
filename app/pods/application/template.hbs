@@ -1,28 +1,13 @@
 <h1>Magic Stash: Environments</h1>
 
-{{input type='range' min=0 max=1 step=0.01 value=player.masterVolume}}
-
-{{#if playingSounds.length}}
-  <a href {{action 'stopAll'}}>Stop</a>
-{{/if}}
+{{main-controls sounds=model.sounds
+  onStopAll=(route-action 'stopAll')}}
 
 <p>Environments <a href {{action 'createEnvironment'}}>+</a></p>
-<ul>
-  {{#each model.environments as |environment|}}
-    <li>
-      <a href {{action 'playEnvironment' environment}}>{{environment.name}}</a>
-      <a href {{action 'deleteEnvironment' environment}}>&times;</a>
-    </li>
-  {{/each}}
-</ul>
+{{environment-list environments=model.environments
+  onPlay=(route-action 'playEnvironment')
+  onDelete=(route-action 'deleteEnvironment')}}
 
 <p>Sounds</p>
-<ul>
-  {{#each model.sounds as |sound|}}
-    <li>
-      {{sound.name}}
-      <a href {{action 'play' sound}}>{{if sound.playing 'Stop' 'Play'}}</a>
-      <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
-    </li>
-  {{/each}}
-</ul>
+{{sound-list sounds=model.sounds
+  onPlay=(route-action 'play')}}

@@ -5,6 +5,8 @@ import config from 'ms-environments/config/environment';
 
 export default Ember.Object.extend({
 
+  category: '(Uncategorized)',
+
   init(...args) {
     this._super(...args);
     this.set('gain', this.get('context').createGain());

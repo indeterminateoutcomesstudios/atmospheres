@@ -1,0 +1,8 @@
+<ul>
+  {{#each environments as |environment|}}
+    <li>
+      <a href {{action (action onPlay environment)}}>{{environment.name}}</a>
+      <a href {{action (action onDelete environment)}}>&times;</a>
+    </li>
+  {{/each}}
+</ul>
