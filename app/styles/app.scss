@@ -1,0 +1,25 @@
+@import '_resets';
+@import '_layout';
+@import '_palette';
+
+:root {
+  color: $color-foreground;
+  font-family: sans-serif;
+  font-size: 62.5%;
+}
+
+.banner {
+  padding: $spacing-normal;
+  border-bottom: 1px solid $color-foreground;
+}
+
+.environment-list {
+  border-right: 1px solid $color-foreground;
+}
+
+.sound-list {
+  padding: $spacing-normal;
+  background: $color-background;
+}
+
+@import 'pod-styles';

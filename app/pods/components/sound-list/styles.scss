@@ -1,0 +1,35 @@
+fieldset {
+  margin-bottom: $spacing-normal;
+  background: white;
+  border: 1px solid $color-foreground;
+  border-radius: $spacing-normal;
+}
+
+legend {
+  display: block;
+  float: left;
+  padding: $spacing-close $spacing-normal;
+  width: 100%;
+
+  border-bottom: 1px solid $color-foreground;
+
+  font-size: 1.2rem;
+
+  &.em {
+    font-weight: bold;
+  }
+}
+
+fieldset ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: $spacing-normal;
+
+  font-size: 1.3rem;
+  font-weight: lighter;
+}
+
+.active {
+  font-weight: bold;
+}

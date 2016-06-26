@@ -1,0 +1,15 @@
+p, li {
+  display: flex;
+  justify-content: space-between;
+  padding: $spacing-normal;
+  border-bottom: 1px solid $color-foreground;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+li {
+  font-size: 1.3rem;
+  font-weight: lighter;
+}

@@ -1,0 +1,31 @@
+:root,
+body,
+body > .ember-view {
+  height: 100%;
+}
+
+body > .ember-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.environment-list {
+  flex-basis: 200px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.sound-list {
+  flex-grow: 1;
+}
