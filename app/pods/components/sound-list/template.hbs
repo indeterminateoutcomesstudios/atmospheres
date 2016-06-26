@@ -1,4 +1,18 @@
 <ul>
+  {{#if playingSounds.length}}
+    <li>
+      Now playing
+      <ul>
+        {{#each playingSounds as |sound|}}
+          <li>
+            {{sound.name}}
+            <a href {{action (action onPlay sound)}}>{{if sound.playing 'Stop' 'Play'}}</a>
+            <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
+          </li>
+        {{/each}}
+      </ul>
+    </li>
+  {{/if}}
   {{#each categories as |category|}}
     <li>
       {{category.value}}
