@@ -41,8 +41,9 @@ export default Ember.Object.extend({
     }
     let fadeGain = this.get('fadeGain');
     let { currentTime } = this.get('context');
-    fadeGain.gain.linearRampToValueAtTime(1, currentTime);
-    fadeGain.gain.linearRampToValueAtTime(0, currentTime + this.get('fadeTime'));
+    fadeGain.gain
+      .setValueAtTime(1, currentTime)
+      .linearRampToValueAtTime(0, currentTime + this.get('fadeTime'));
     this.set('playing', false);
     Ember.run.later(() => {
       source.stop();
@@ -65,8 +66,9 @@ export default Ember.Object.extend({
     source.connect(fadeGain);
     gain.connect(destinationNode);
     let { currentTime } = context;
-    fadeGain.gain.linearRampToValueAtTime(0, currentTime);
-    fadeGain.gain.linearRampToValueAtTime(1, currentTime + this.get('fadeTime'));
+    fadeGain.gain
+      .setValueAtTime(0, currentTime)
+      .linearRampToValueAtTime(1, currentTime + this.get('fadeTime'));
     source.start(0);
     return source;
   },
@@ -75,8 +77,7 @@ export default Ember.Object.extend({
     let { context, gain } = this.getProperties('context', 'gain');
     let source = context.createBufferSource();
     Ember.setProperties(source, { buffer, loop });
-    source.connect(gain);
-    gain.connect(destinationNode);
+    source.connect(destinationNode);
     source.start(0);
     return source;
   }
