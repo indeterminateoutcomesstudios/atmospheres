@@ -23,19 +23,11 @@ export default Ember.Object.extend({
   }).volatile(),
 
   play(node) {
-    this._loadSound().then(buffer => {
-      let source = this.get('context').createBufferSource(),
-          gain = this.get('gain');
-      source.buffer = buffer;
-      source.loop = true;
-      source.connect(gain);
-      gain.connect(node);
-      source.start(0);
+    this._loadSound(this.get('url')).then(buffer =>
       this.setProperties({
         playing: true,
-        source
-      });
-    });
+        source: this._playSound(buffer, node)
+      }));
   },
 
   stop() {
@@ -51,11 +43,21 @@ export default Ember.Object.extend({
     });
   },
 
-  _loadSound() {
+  _loadSound(url) {
     return new Ember.RSVP.Promise((resolve, reject) =>
-      fetch(config.soundsURL + this.get('url'))
+      fetch(config.soundsURL + url)
         .then(res => res.arrayBuffer())
         .then(res => this.get('context').decodeAudioData(res, resolve, reject)));
+  },
+
+  _playSound(buffer, destinationNode, loop = true) {
+    let source = this.get('context').createBufferSource(),
+        gain = this.get('gain');
+    Ember.setProperties(source, { buffer, loop });
+    source.connect(gain);
+    gain.connect(destinationNode);
+    source.start(0);
+    return source;
   }
 
 });
