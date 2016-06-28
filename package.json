@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
+    "start": "ember server --host 0.0.0.0 --port 1337",
     "test": "ember test"
   },
   "repository": "",

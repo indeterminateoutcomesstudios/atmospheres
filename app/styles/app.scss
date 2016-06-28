@@ -10,16 +10,18 @@
 
 .banner {
   padding: $spacing-normal;
-  border-bottom: 1px solid $color-foreground;
+  background: $color-background-bright;
+  // border-bottom: 1px solid $color-foreground;
 }
 
 .environment-list {
-  border-right: 1px solid $color-foreground;
+  background: $color-background-light;
+  // border-right: 1px solid $color-foreground;
 }
 
 .sound-list {
   padding: $spacing-normal;
-  background: $color-background;
+  background: $color-background-medium;
 }
 
 @import 'pod-styles';

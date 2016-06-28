@@ -1,12 +1,17 @@
 & {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
 
 fieldset {
-  background: white;
-  border: 1px solid $color-foreground;
+  max-width: 60.0rem;
+  overflow: hidden;
+  width: 100%;
+
+  background: $color-background-light;
+  border: none;
   border-radius: $spacing-normal;
 }
 
@@ -16,7 +21,7 @@ legend {
   padding: $spacing-close $spacing-normal;
   width: 100%;
 
-  border-bottom: 1px solid $color-foreground;
+  background: $color-background-bright;
 
   font-size: 1.1rem;
   text-transform: uppercase;
@@ -34,6 +39,10 @@ fieldset ul {
 
   font-size: 1.3rem;
   font-weight: lighter;
+}
+
+fieldset li {
+  margin: $spacing-close 0;
 }
 
 > ul {
