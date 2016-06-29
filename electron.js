@@ -1,7 +1,8 @@
 'use strict';
 
-let { app, BrowserWindow } = require('electron');
+let { app, BrowserWindow, ipcMain } = require('electron');
 let path = require('path');
+let recursive = require('recursive-readdir');
 let dirname = __dirname || path.resolve(path.dirname());
 let emberAppLocation = `file://${dirname}/dist/index.html`;
 
@@ -85,4 +86,43 @@ app.on('ready', function onReady() {
     console.log('This is a serious issue that needs to be handled and/or debugged.');
     console.log(`Exception: ${err}`);
   });
+
+  ipcMain.on('sounds:get', (event, arg) => {
+    let soundsPath = '/Users/Tim/Desktop/sounds/';
+
+    recursive(soundsPath, [ '.DS_Store' ], function (err, files) {
+      let mappedFiles = {};
+      files = files.map(function(file) {
+        let path = file.replace(soundsPath, ''),
+            pathParts = path.split('/'),
+            category = pathParts[0];
+        if (pathParts.length === 1) {
+          return null;
+        }
+
+        let name = pathParts[1].replace('.wav', ''),
+            key = category + '.' + name;
+        mappedFiles[key] = mappedFiles[key] || { category, name };
+
+        if (pathParts.length == 2) {
+          // Category and sound
+          mappedFiles[key].url = file;
+        } else if (pathParts.length === 3) {
+          // Category and multiple sounds
+          mappedFiles[key].urls = mappedFiles[key].urls || [];
+          mappedFiles[key].urls.push(file);
+        }
+
+        // mappedFiles[key] = fileRecord;
+
+      });
+
+      let mappedFilesAsArray = Object.keys(mappedFiles)
+        .map((key) => mappedFiles[key]);
+
+      event.sender.send('sounds:get:response', mappedFilesAsArray);
+    });
+
+  });
+
 });

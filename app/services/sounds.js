@@ -1,5 +1,12 @@
 import Ember from 'ember';
 
+let electronApp;
+try {
+  electronApp = require('electron').ipcRenderer;
+} catch(err) {
+  Ember.Logger.debug('`electron` module not loaded; not running in Electron?');
+}
+
 import Sound from 'ms-environments/models/sound';
 import IntermittentSound from 'ms-environments/models/intermittent-sound';
 
@@ -8,8 +15,19 @@ export default Ember.Service.extend({
   player: Ember.inject.service(),
 
   getSounds() {
-    let soundStubs = [
+    let strategy = electronApp ? this._getSoundsFromFileSystem : this._getSoundsFromStubs;
+    return strategy().then(sounds =>
+      Ember.A(sounds.map(s => {
+        if (s.url) {
+          return Sound.create({ ...s, context: this.get('player.context') });
+        } else if (s.urls) {
+          return IntermittentSound.create({ ...s, context: this.get('player.context') });
+        }
+      })));
+  },
 
+  _getSoundsFromStubs() {
+    return Ember.RSVP.Promise.resolve([
       { name: 'Rain (Drizzle)',  category: 'Weather', url: 'weather/rain-drizzle.wav' },
       { name: 'Rain (Light)',    category: 'Weather', url: 'weather/rain-light.wav' },
       { name: 'Rain (Medium)',   category: 'Weather', url: 'weather/rain-medium.wav' },
@@ -64,14 +82,14 @@ export default Ember.Service.extend({
       { name: 'Drips (Heavy)',    category: 'Dungeon', url: 'dungeon/drips-heavy.wav' },
       { name: 'Drips (Ice)',      category: 'Dungeon', url: 'dungeon/drips-ice.wav' },
 
-    ];
-    return Ember.A(soundStubs.map(s => {
-      if (s.url) {
-        return Sound.create({ ...s, context: this.get('player.context') });
-      } else if (s.urls) {
-        return IntermittentSound.create({ ...s, context: this.get('player.context') });
-      }
-    }));
+    ]);
+  },
+
+  _getSoundsFromFileSystem() {
+    return new Ember.RSVP.Promise(resolve =>
+      electronApp.on('sounds:get:response', (event, results) => {
+        resolve(results);
+      }).send('sounds:get', 'ping'));
   }
 
 });

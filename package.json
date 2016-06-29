@@ -87,5 +87,8 @@
       "ProductName": null,
       "InternalName": null
     }
+  },
+  "dependencies": {
+    "recursive-readdir": "^2.0.0"
   }
 }

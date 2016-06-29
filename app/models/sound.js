@@ -1,6 +1,13 @@
 import Ember from 'ember';
 import fetch from 'fetch';
 
+let fs;
+try {
+  fs = require('fs');
+} catch(err) {
+  Ember.Logger.debug('`fs` module not loaded; not running in Electron?');
+}
+
 import config from 'ms-environments/config/environment';
 
 export default Ember.Object.extend({
@@ -53,10 +60,21 @@ export default Ember.Object.extend({
   },
 
   _loadSound(url) {
-    return new Ember.RSVP.Promise((resolve, reject) =>
-      fetch(config.soundsURL + url)
-        .then(res => res.arrayBuffer())
-        .then(res => this.get('context').decodeAudioData(res, resolve, reject)));
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      if (fs) {
+        fs.readFile(url, (err, res) => {
+          if (err) {
+            reject(err);
+          }
+          res = new Uint8Array(res).buffer;
+          this.get('context').decodeAudioData(res, resolve, reject);
+        });
+      } else {
+        fetch(config.soundsURL + url)
+          .then(res => res.arrayBuffer())
+          .then(res => this.get('context').decodeAudioData(res, resolve, reject));
+      }
+    });
   },
 
   _playSoundWithFade(buffer, destinationNode, loop = true) {
