@@ -16,12 +16,12 @@
   {{/each}}
 </ul>
 {{#if playingSounds.length}}
-  <fieldset>
+  <fieldset class="now-playing">
     <legend class="em">Now Playing</legend>
     <ul>
       {{#each playingSounds as |sound|}}
         <li>
-          <a href {{action (action onPlay sound)}} class="{{if sound.playing 'active'}}">{{sound.name}}</a>
+          <a href {{action (action onPlay sound)}} class="active">{{sound.name}}</a>
           <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
         </li>
       {{/each}}

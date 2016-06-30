@@ -1,12 +1,42 @@
 & {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
+}
+
+> ul {
+  overflow-y: auto;
+
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    height: $spacing-normal;
+    width: 100%;
+
+    background: linear-gradient(to bottom,
+      $color-background-medium,
+      transparentize($color-background-medium, 1));
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: $spacing-normal;
+    width: 100%;
+    bottom: 0;
+
+    background: linear-gradient(to top,
+      $color-background-medium,
+      transparentize($color-background-medium, 1));
+  }
 }
 
 fieldset {
   flex-shrink: 0;
+  margin: $spacing-normal auto;
   max-width: 60.0rem;
   overflow: hidden;
   width: 100%;
@@ -14,6 +44,25 @@ fieldset {
   background: $color-background-light;
   border: none;
   border-radius: $spacing-normal;
+
+  &.now-playing {
+
+    margin-top: 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      height: $spacing-normal;
+      width: 100%;
+      transform: translateY(-100%);
+
+      background: linear-gradient(to top,
+        $color-background-medium,
+        transparentize($color-background-medium, 1));
+    }
+
+  }
 }
 
 legend {
@@ -35,7 +84,7 @@ legend {
 fieldset ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: $spacing-normal;
 
   font-size: 1.3rem;
@@ -44,15 +93,7 @@ fieldset ul {
 
 fieldset li {
   margin: $spacing-close 0;
-}
-
-> ul {
-  overflow-y: auto;
-  margin-bottom: $spacing-normal;
-}
-
-> ul > li + li {
-  margin-top: $spacing-normal;
+  padding-right: $spacing-normal;
 }
 
 .active {
