@@ -1,12 +1,18 @@
 <ul>
-  {{#each categories as |category|}}
+  {{#each categories as |category categoryIndex|}}
     <li>
       <fieldset>
         <legend>{{category.value}}</legend>
         <ul>
-          {{#each category.items as |sound|}}
+          {{#each category.items as |sound soundIndex|}}
             <li>
-              <a href {{action (action onPlay sound)}} class="{{if sound.playing 'active'}}">{{sound.name}}</a>
+              <input type="checkbox" id="sound_{{categoryIndex}}_{{soundIndex}}" />
+              <label for="sound_{{categoryIndex}}_{{soundIndex}}" class="backdrop"></label>
+              <span class="popup">(Settings TBD)</span>
+              <a href {{action (action onPlay sound)}} class="{{if sound.playing 'active'}}">
+                {{sound.name}}
+              </a>
+              <label for="sound_{{categoryIndex}}_{{soundIndex}}">⚙</label>
               <div>{{input type='range' min=0 max=1 step=0.01 value=sound.volume}}</div>
             </li>
           {{/each}}
