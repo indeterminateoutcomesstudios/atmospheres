@@ -1,9 +1,18 @@
-<p>Environments <a href {{action (action onCreate)}}>+</a></p>
+<p>Environments <button {{action (action 'enterCreateMode')}}>✚</button></p>
 <ul>
   {{#each environments as |environment|}}
     <li>
       <a href {{action (action onPlay environment)}}>{{environment.name}}</a>
-      <a href {{action (action onDelete environment)}}>&times;</a>
+      <button {{action (action onDelete environment)}}>✘</button>
     </li>
   {{/each}}
+  {{#if isCreating}}
+    <li>
+      <form {{action (action 'save') on='submit'}}>
+        {{input type='text' value=name}}
+        <button {{action (action 'leaveCreateMode')}} type="button">✘</button>
+        <button type="submit">✔</button>
+      </form>
+    </li>
+  {{/if}}
 </ul>

@@ -20,15 +20,14 @@ export default Ember.Route.extend({
       let model = this.modelFor(this.routeName);
       model.sounds.filterBy('playing').forEach(s => s.stop());
     },
-    createEnvironment() {
-      let model = this.modelFor(this.routeName),
-          name = window.prompt('Name this environment:');
+    createEnvironment(name) {
+      let model = this.modelFor(this.routeName);
 
       if (!name) {
-        return;
+        return Ember.RSVP.Promise.reject();
       }
 
-      this.store.createRecord('environment', {
+      return this.store.createRecord('environment', {
         name,
         sounds: model.sounds.filterBy('playing')
           .map(s => s.getProperties('name', 'volume'))
