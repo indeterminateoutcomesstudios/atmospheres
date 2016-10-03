@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .a {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>play</title>
+  <path class="a" d="M6.12,13.88V6.12a1,1,0,0,1,1.45-.89l7.76,3.88a1,1,0,0,1,0,1.79L7.57,14.78A1,1,0,0,1,6.12,13.88Z"/>
+</svg>

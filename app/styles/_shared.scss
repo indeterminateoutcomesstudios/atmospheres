@@ -1,6 +1,7 @@
 @import 'shared/_palette';
 @import 'shared/_resets';
 @import 'shared/_typography';
+@import 'shared/_icons';
 
 @mixin banner() {
 
@@ -9,6 +10,7 @@
   align-items: center;
   justify-content: center;
   height: 40px;
+  position: relative;
 
   background-color: $color-primary;
 

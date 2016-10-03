@@ -1,0 +1,28 @@
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+use, svg * {
+  fill: inherit;
+  stroke: inherit;
+  stroke-linecap: inherit;
+  stroke-linejoin: inherit;
+  stroke-width: inherit;
+  transform-origin: inherit;
+  vector-effect: inherit;
+}
+
+svg.icon {
+  height: 20px;
+  width: 20px;
+
+  pointer-events: none;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}

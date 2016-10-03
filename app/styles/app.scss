@@ -8,16 +8,6 @@ main            { @include main; }
 aside           { @include sidebar; }
 aside ul        { @include sidebar-list; }
 
-.environment-list {
-  background: $color-background-light;
-  // border-right: 1px solid $color-foreground;
-}
-
-.sound-list {
-  padding: 0 $spacing-normal;
-  background: $color-background-medium;
-}
-
 @import 'pod-styles';
 
 [data-ember-action]:not(form) {
@@ -37,7 +27,7 @@ aside ul        { @include sidebar-list; }
 
     color: $color-background-bright;
 
-    &.playing {
+    &.active {
       color: white;
     }
   }
@@ -48,13 +38,61 @@ aside ul        { @include sidebar-list; }
   }
 
   button {
-    height: 36px;
-    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
     margin-right: $spacing-normal;
 
     background: none;
     border: 1px solid currentColor;
     border-radius: 100%;
+  }
+
+}
+
+input[type='range'] {
+
+  width: 150px;
+  -webkit-appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 1px;
+    margin-top: 9px;
+
+    background: currentColor;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 19px;
+    width: 19px;
+    margin-top: -9px;
+
+    background-color: $color-background-medium;
+    border: 1px solid currentColor;
+    border-radius: 100%;
+    cursor: -webkit-grab;
+  }
+
+  .active &, &.active {
+    background-image:
+      linear-gradient(to bottom right, transparent 48%, rgba(white, 0.2) 52%);
+  }
+
+  [role='banner'] & {
+
+    position: absolute;
+    margin-top: -4px;
+    right: $spacing-comfy;
+
+    &::-webkit-slider-thumb {
+      background-color: $color-primary;
+    }
+
   }
 
 }
