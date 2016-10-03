@@ -5,14 +5,25 @@
 
   outline: none;
 
+  color: inherit;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
+  line-height: inherit;
 }
 
 :root {
   box-sizing: border-box;
   overflow: hidden; // Prevent Chrome's overscroll.
+
+  background-color: $color-background-medium;
+
+  color: $color-foreground;
+  font-family: $family-normal;
+  font-size: 62.5%;
+  line-height: 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {

@@ -1,8 +1,10 @@
-<ul>
-  {{#each categories as |category|}}
-    <li>{{#link-to 'sounds.category' category}}{{category}}{{/link-to}}</li>
-  {{/each}}
-</ul>
+<aside>
+  <ul>
+    {{#each categories as |category|}}
+      <li>{{#link-to 'sounds.category' category}}{{category}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</aside>
 <main>
-  {{outlet}}
+  <div class="constrained">{{outlet}}</div>
 </main>

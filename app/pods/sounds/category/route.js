@@ -6,7 +6,10 @@ export default Ember.Route.extend({
 
   model({ category_slug }) {
     return this.get('sounds').getSounds()
-      .then(sounds => sounds.filterBy('category', category_slug));
+      .then(sounds => ({
+        name: category_slug,
+        sounds: sounds.filterBy('category', category_slug)
+      }));
   }
 
 });

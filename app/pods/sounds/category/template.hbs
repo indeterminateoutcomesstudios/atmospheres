@@ -1,5 +1,14 @@
-<ul>
-  {{#each model as |sound|}}
-    <li {{action (route-action 'play' sound)}}>{{sound.name}} ({{sound.playing}})</li>
+<h1>{{model.name}}</h1>
+<ul class="sounds">
+  {{#each model.sounds as |sound|}}
+    <li class="{{if sound.playing 'playing'}}">
+      <span class="name" {{action (route-action 'play' sound)}}>
+        <button>
+          {{if sound.playing 'X' 'O'}}
+        </button>
+        {{sound.name}}
+      </span>
+      {{input type='range' min=0 max=1 step=0.01 value=sound.volume}}
+    </li>
   {{/each}}
 </ul>

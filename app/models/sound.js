@@ -14,6 +14,7 @@ export default Ember.Object.extend({
 
   category: '(Uncategorized)',
   fadeTime: 1.5,
+  playing: false,
 
   init(...args) {
     this._super(...args);

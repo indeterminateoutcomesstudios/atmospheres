@@ -1,31 +1,20 @@
 @import 'shared/_palette';
 @import 'shared/_resets';
+@import 'shared/_typography';
 
-@mixin root() {
+@mixin banner() {
 
-  background-color: $color-background-medium;
-
-  color: $color-foreground;
-  font-family: $family-normal;
-  font-size: 62.5%;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-
-}
-
-@mixin banner($color) {
-
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px;
 
-  background-color: $color;
-
-  color: white;
-  font-size: 1.6rem;
+  background-color: $color-primary;
 
   h1 {
+    color: white;
+    font-size: 1.6rem;
     font-weight: 300;
 
     em {
@@ -35,3 +24,58 @@
   }
 
 }
+
+@mixin content {
+
+  display: flex;
+  flex-grow: 1;
+
+}
+
+@mixin main {
+
+  flex-grow: 1;
+
+  .constrained {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 60.0rem;
+    padding: $spacing-comfy;
+    overflow: {
+      x: hidden;
+      y: auto;
+    }
+  }
+
+}
+
+@mixin sidebar {
+
+  width: 300px;
+
+  background-color: $color-background-dark;
+  box-shadow: inset -4px 0 rgba(black, 0.2);
+
+}
+
+  @mixin sidebar-list {
+
+    font-size: 2.0rem;
+
+    a {
+      display: block;
+      padding: $spacing-comfy;
+
+      &:hover {
+        color: white;
+      }
+
+      &.active {
+        background-color: $color-primary-dim;
+        color: white;
+
+        box-shadow: inset -4px 0 rgba(black, 0.2);
+      }
+    }
+
+  }

@@ -2,13 +2,11 @@
 @import '_palette';
 @import '_layout';
 
-:root {
-  @include root;
-}
-
-[role='banner'] {
-  @include banner($color-primary);
-}
+[role='banner'] { @include banner; }
+.content        { @include content; }
+main            { @include main; }
+aside           { @include sidebar; }
+aside ul        { @include sidebar-list; }
 
 .environment-list {
   background: $color-background-light;
@@ -21,3 +19,42 @@
 }
 
 @import 'pod-styles';
+
+[data-ember-action]:not(form) {
+  cursor: pointer;
+}
+
+.sounds {
+
+  font-size: 2.0rem;
+
+  li {
+    height: 36px;
+    margin: $spacing-comfy 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: $color-background-bright;
+
+    &.playing {
+      color: white;
+    }
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    height: 36px;
+    width: 36px;
+    margin-right: $spacing-normal;
+
+    background: none;
+    border: 1px solid currentColor;
+    border-radius: 100%;
+  }
+
+}
