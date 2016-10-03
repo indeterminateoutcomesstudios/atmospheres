@@ -13,17 +13,24 @@ import IntermittentSound from 'ms-environments/models/intermittent-sound';
 export default Ember.Service.extend({
 
   player: Ember.inject.service(),
+  cachedSounds: null,
 
   getSounds() {
+    if (this.get('cachedSounds')) {
+      return Ember.RSVP.Promise.resolve(this.get('cachedSounds'));
+    }
     let strategy = electronApp ? this._getSoundsFromFileSystem : this._getSoundsFromStubs;
-    return strategy().then(sounds =>
-      Ember.A(sounds.map(s => {
+    return strategy().then(sounds => {
+      let soundObjects = Ember.A(sounds.map(s => {
         if (s.url) {
           return Sound.create({ ...s, context: this.get('player.context') });
         } else if (s.urls) {
           return IntermittentSound.create({ ...s, context: this.get('player.context') });
         }
-      })));
+      }));
+      this.set('cachedSounds', soundObjects);
+      return soundObjects;
+    });
   },
 
   _getSoundsFromStubs() {

@@ -1,0 +1,8 @@
+<ul>
+  {{#each categories as |category|}}
+    <li>{{#link-to 'sounds.category' category}}{{category}}{{/link-to}}</li>
+  {{/each}}
+</ul>
+<main>
+  {{outlet}}
+</main>

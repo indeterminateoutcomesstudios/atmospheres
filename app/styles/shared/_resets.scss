@@ -1,0 +1,34 @@
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+:root {
+  box-sizing: border-box;
+  overflow: hidden; // Prevent Chrome's overscroll.
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+input {
+  outline: none;
+}

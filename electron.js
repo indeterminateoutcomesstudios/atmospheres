@@ -27,7 +27,8 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    titleBarStyle: 'hidden-inset'
   });
 
   delete mainWindow.module;
@@ -88,7 +89,7 @@ app.on('ready', function onReady() {
   });
 
   ipcMain.on('sounds:get', (event, arg) => {
-    let soundsPath = '/Users/Tim/Desktop/sounds/';
+    let soundsPath = '/Users/Tim/Sounds/';
 
     recursive(soundsPath, [ '.DS_Store' ], function (err, files) {
       let mappedFiles = {};

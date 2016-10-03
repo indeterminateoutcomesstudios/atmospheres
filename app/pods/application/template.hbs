@@ -1,13 +1,8 @@
-<div class="banner">
-  <h1>Magic Stash: <em>Environments</em></h1>
-  {{main-controls sounds=model.sounds
-    onStopAll=(route-action 'stopAll')}}
-</div>
+<header role="banner">
+  <h1>Magic Stash: <em>Atmospheres</em></h1>
+  {{!-- {{main-controls sounds=model.sounds
+    onStopAll=(route-action 'stopAll')}} --}}
+</header>
 <div class="content">
-  {{environment-list environments=model.environments
-    onPlay=(route-action 'playEnvironment')
-    onCreate=(route-action 'createEnvironment')
-    onDelete=(route-action 'deleteEnvironment')}}
-  {{sound-list sounds=model.sounds
-    onPlay=(route-action 'play')}}
+  {{outlet}}
 </div>

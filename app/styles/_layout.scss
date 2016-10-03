@@ -14,6 +14,14 @@ body > .ember-view {
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
+  padding: $spacing-normal;
+  padding-left: 76px; // Room for window controls.
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+
+  > * {
+    -webkit-app-region: no-drag;
+  }
 }
 
 .content {

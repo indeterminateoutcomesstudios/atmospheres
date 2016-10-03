@@ -6,7 +6,7 @@ module.exports = function(environment) {
     podModulePrefix: 'ms-environments/pods',
     environment: environment,
     baseURL: '/',
-    soundsURL: '/sounds/',
+    soundsURL: 'sounds/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {

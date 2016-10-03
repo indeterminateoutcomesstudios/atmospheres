@@ -1,0 +1,24 @@
+$color-background-medium: #262626;
+$color-background-dark: #1f1f1f;
+$color-background-dim: mix($color-background-medium, $color-background-dark);
+
+$color-foreground: #ccc;
+$color-background-bright: #555;
+$color-background-light:  #444;
+
+$spacing-normal: 1.0rem;
+$spacing-close:  $spacing-normal / 2;
+$spacing-comfy:  $spacing-normal * 1.5;
+
+$family-normal: 'Alegreya';
+$family-system:  -apple-system, BlinkMacSystemFont;
+
+$weight-thin:       100;
+$weight-extralight: 200;
+$weight-light:      300;
+$weight-regular:    400;
+$weight-medium:     500;
+$weight-semibold:   600;
+$weight-bold:       700;
+$weight-extrabold:  800;
+$weight-black:      900;

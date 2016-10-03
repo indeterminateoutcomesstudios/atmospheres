@@ -3,7 +3,7 @@ import Sound from './sound';
 
 export default Sound.extend({
 
-  frequency: 7500,
+  frequency: 30000,
   playingSources: null,
 
   init(...args) {
