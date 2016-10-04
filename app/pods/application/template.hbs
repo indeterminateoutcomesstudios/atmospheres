@@ -1,9 +1,16 @@
 <header role="banner">
   <h1>Magic Stash: <em>Atmospheres</em></h1>
-  {{input type='range' min=0 max=1 step=0.01 value=player.masterVolume class='active'}}
-  {{!-- {{main-controls sounds=model.sounds
-    onStopAll=(route-action 'stopAll')}} --}}
+  <nav>
+    {{#link-to 'sounds'}}Sounds{{/link-to}}
+    {{#link-to 'atmospheres'}}Atmospheres{{/link-to}}
+  </nav>
 </header>
 <div class="content">
-  {{outlet}}
+  <aside>
+    <div id="sidebar"></div>
+    <footer>
+      {{input type='range' min=0 max=1 step=0.01 value=player.masterVolume class='active'}}
+    </footer>
+  </aside>
+  <main><div class="constrained">{{outlet}}</div></main>
 </div>

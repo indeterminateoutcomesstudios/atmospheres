@@ -45,23 +45,13 @@ aside ul        { @include sidebar-list; }
     }
   }
 
+  button.icon {
+    margin-right: $spacing-normal;
+  }
+
   span {
     display: flex;
     align-items: center;
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px;
-    width: 24px;
-    margin-right: $spacing-normal;
-
-    background: none;
-    border: 1px solid currentColor;
-    border-radius: 100%;
-
   }
 
 }
@@ -71,6 +61,7 @@ input[type='range'] {
   width: 150px;
   -webkit-appearance: none;
   background-color: transparent;
+  border-bottom: 9px solid $color-background-medium;
   cursor: pointer;
 
   &::-webkit-slider-runnable-track {
@@ -98,16 +89,26 @@ input[type='range'] {
       linear-gradient(to bottom right, transparent 48%, rgba(white, 0.2) 52%);
   }
 
-  [role='banner'] & {
+  aside & {
 
-    position: absolute;
-    margin-top: -4px;
-    right: $spacing-comfy;
+    border-bottom: 9px solid $color-background-dark;
 
     &::-webkit-slider-thumb {
-      background-color: $color-primary;
+      background-color: $color-background-dark;
     }
 
   }
 
+}
+
+button.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 100%;
 }

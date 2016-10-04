@@ -3,7 +3,7 @@
   {{#each model.sounds as |sound|}}
     <li class="{{if sound.playing 'active'}}">
       <span class="name" {{action (route-action 'play' sound)}}>
-        <button>
+        <button class="icon">
           {{icon 'stop' class='stop'}}
           {{icon 'play' class='play'}}
         </button>

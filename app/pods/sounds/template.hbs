@@ -1,11 +1,10 @@
-<aside>
+{{#ember-wormhole to='sidebar'}}
+  <h2>Categories</h2>
   <ul>
     <li>{{#link-to 'sounds.now-playing' class='de-em'}}Now Playing{{/link-to}}</li>
     {{#each categories as |category|}}
       <li>{{#link-to 'sounds.category' category}}{{category}}{{/link-to}}</li>
     {{/each}}
   </ul>
-</aside>
-<main>
-  <div class="constrained">{{outlet}}</div>
-</main>
+{{/ember-wormhole}}
+{{outlet}}
