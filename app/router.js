@@ -12,6 +12,7 @@ Router.map(function() {
   });
   this.route('atmospheres', function() {
     this.route('details', { path: ':atmosphere_id' });
+    this.route('create');
   });
 });
 

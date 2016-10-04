@@ -13,6 +13,7 @@ export default Ember.Route.extend({
 
   afterModel(model) {
     let soundPointers = Ember.A();
+    if (!model.environment.get('sounds.length')) { return model; }
     model.environment.get('sounds').forEach(sound => {
       soundPointers.push(model.sounds.findBy('name', sound.name));
     });

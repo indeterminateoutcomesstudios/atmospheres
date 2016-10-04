@@ -1,7 +1,7 @@
 {{#ember-wormhole to='sidebar'}}
   <h2>
     Atmospheres
-    <button {{action (route-action 'createEnvironment' 'test')}} class="icon">{{icon 'add'}}</button>
+    {{#link-to 'atmospheres.create' class='icon'}}{{icon 'add'}}{{/link-to}}
   </h2>
   <ul>
     {{#each model as |environment|}}
