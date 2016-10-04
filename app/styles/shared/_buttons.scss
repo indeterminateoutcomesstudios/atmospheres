@@ -4,7 +4,7 @@
   padding: $spacing-close $spacing-comfy;
 
   background: none;
-  border: 1px solid currentColor;
+  border: 1px solid $color-foreground-dark;
   border-radius: 4px;
 
   color: $color-foreground-dim;
@@ -12,6 +12,11 @@
 
   &.primary {
     color: white;
+  }
+
+  &.danger {
+    border-color: #5c3535;
+    color: #b34f4f;
   }
 
 }

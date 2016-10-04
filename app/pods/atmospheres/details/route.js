@@ -34,6 +34,12 @@ export default Ember.Route.extend({
       environment.set('name', this.controller.get('newName'));
       environment.save();
       this.controller.set('showEditModal', false);
+    },
+    destroy() {
+      if (!window.confirm('Are you sure you want to delete this Atmosphere?')) { return; }
+      let { environment } = this.currentModel;
+      environment.destroyRecord();
+      this.transitionTo('atmospheres');
     }
   }
 

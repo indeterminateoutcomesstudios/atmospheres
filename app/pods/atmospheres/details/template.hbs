@@ -1,4 +1,10 @@
-<h1>{{model.name}} <button {{action (toggle 'showEditModal' this)}} class="button">Rename</button></h1>
+<h1>
+  {{model.name}}
+  <span class="actions">
+    <button {{action (route-action 'destroy')}} class="button danger">Delete</button>
+    <button {{action (toggle 'showEditModal' this)}} class="button">Rename</button>
+  </span>
+</h1>
 {{sound-list model=model.sounds}}
 {{#if showEditModal}}
   {{#x-modal}}
