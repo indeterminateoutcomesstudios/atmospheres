@@ -68,6 +68,10 @@
       display: block;
       padding: $spacing-comfy;
 
+      &.de-em {
+        font-style: oblique;
+      }
+
       &:hover {
         color: white;
       }

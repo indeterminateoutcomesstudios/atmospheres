@@ -25,10 +25,23 @@ aside ul        { @include sidebar-list; }
     align-items: center;
     justify-content: space-between;
 
-    color: $color-background-bright;
+    color: $color-foreground-dark;
+
+    &.active,
+    &.active button {
+      color: white;
+    }
+
+    .icon.stop { display: none; }
+    .icon.play { display: block; }
 
     &.active {
-      color: white;
+      .icon.stop { display: block; }
+      .icon.play { display: none; }
+    }
+
+    &.empty {
+      font-style: oblique;
     }
   }
 
@@ -41,13 +54,14 @@ aside ul        { @include sidebar-list; }
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
     margin-right: $spacing-normal;
 
     background: none;
     border: 1px solid currentColor;
     border-radius: 100%;
+
   }
 
 }
@@ -62,6 +76,7 @@ input[type='range'] {
   &::-webkit-slider-runnable-track {
     height: 1px;
     margin-top: 9px;
+    padding: 0 6px;
 
     background: currentColor;
   }

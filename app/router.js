@@ -7,6 +7,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('sounds', function() {
+    this.route('now-playing', { path: 'now-playing' });
     this.route('category', { path: ':category_slug' });
   });
 });
