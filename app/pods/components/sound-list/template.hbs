@@ -1,4 +1,20 @@
-<ul>
+{{#each model as |sound|}}
+  <li class="{{if sound.playing 'active'}}">
+    <span class="name" {{action (route-action 'play' sound)}}>
+      <button class="icon">
+        {{icon 'stop' class='stop'}}
+        {{icon 'play' class='play'}}
+      </button>
+      {{sound.name}}
+    </span>
+    {{input type='range' min=0 max=1 step=0.01 value=sound.volume}}
+  </li>
+{{/each}}
+{{#unless model.length}}
+  <li class="de-em">Nothing to show.</li>
+{{/unless}}
+
+{{!-- <ul>
   {{#each categories as |category categoryIndex|}}
     <li>
       <fieldset>
@@ -33,4 +49,4 @@
       {{/each}}
     </ul>
   </fieldset>
-{{/if}}
+{{/if}} --}}

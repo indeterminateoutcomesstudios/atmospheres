@@ -14,48 +14,6 @@ aside ul        { @include sidebar-list; }
   cursor: pointer;
 }
 
-.sounds {
-
-  font-size: 2.0rem;
-
-  li {
-    height: 36px;
-    margin: $spacing-comfy 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    color: $color-foreground-dark;
-
-    &.active,
-    &.active button {
-      color: white;
-    }
-
-    .icon.stop { display: none; }
-    .icon.play { display: block; }
-
-    &.active {
-      .icon.stop { display: block; }
-      .icon.play { display: none; }
-    }
-
-    &.empty {
-      font-style: oblique;
-    }
-  }
-
-  button.icon {
-    margin-right: $spacing-normal;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-  }
-
-}
-
 input[type='range'] {
 
   width: 150px;
