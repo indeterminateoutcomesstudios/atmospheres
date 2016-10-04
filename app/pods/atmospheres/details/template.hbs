@@ -1,2 +1,16 @@
-<h1>{{model.name}}</h1>
+<h1>{{model.name}} <button {{action (toggle 'showEditModal' this)}} class="button">Rename</button></h1>
 {{sound-list model=model.sounds}}
+{{#if showEditModal}}
+  {{#x-modal}}
+    <form {{action (route-action 'save') on='submit'}} class="modal">
+      <p>
+        <label for="name">Name</label>
+        {{input id='name' value=newName}}
+      </p>
+      <p class="actions">
+        <button {{action (toggle 'showEditModal' this)}} class="button">Cancel</button>
+        <button type="submit" class="button primary">Save</button>
+      </p>
+    </form>
+  {{/x-modal}}
+{{/if}}

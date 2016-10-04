@@ -21,6 +21,19 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     this._super(controller, model.environment);
+    controller.setProperties({
+      newName: model.environment.get('name'),
+      showEditModal: false
+    });
+  },
+
+  actions: {
+    save() {
+      let { environment } = this.currentModel;
+      environment.set('name', this.controller.get('newName'));
+      environment.save();
+      this.controller.set('showEditModal', false);
+    }
   }
 
 });

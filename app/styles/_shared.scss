@@ -2,6 +2,8 @@
 @import 'shared/_resets';
 @import 'shared/_typography';
 @import 'shared/_icons';
+@import 'shared/_buttons';
+@import 'shared/_input';
 
 @mixin banner() {
 
@@ -73,6 +75,7 @@
 @mixin main {
 
   flex-grow: 1;
+  position: relative;
 
   .constrained {
     height: 100%;
@@ -83,6 +86,12 @@
       x: hidden;
       y: auto;
     }
+  }
+
+  h1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
 }
@@ -130,6 +139,8 @@
       }
 
       &:hover {
+        background-color: $color-background-dim;
+        box-shadow: inset -4px 0 rgba(black, 0.2);
         color: white;
       }
 
