@@ -122,6 +122,10 @@
     flex-shrink: 0;
     justify-content: center;
     padding: $spacing-comfy;
+
+    * + * {
+      margin-left: $spacing-comfy;
+    }
   }
 
 }

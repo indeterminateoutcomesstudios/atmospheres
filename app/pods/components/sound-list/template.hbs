@@ -1,7 +1,7 @@
 {{#each model as |sound|}}
   <li class="{{if sound.playing 'active'}}">
     <span class="name" {{action (route-action 'play' sound)}}>
-      <button class="icon">
+      <button class="icon status">
         {{icon 'stop' class='stop'}}
         {{icon 'play' class='play'}}
       </button>

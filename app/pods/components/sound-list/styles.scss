@@ -12,7 +12,7 @@
     color: $color-foreground-dark;
 
     &.active,
-    &.active button {
+    &.active button.status {
       color: white;
     }
 
