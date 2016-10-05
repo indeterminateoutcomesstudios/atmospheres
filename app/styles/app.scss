@@ -7,6 +7,7 @@
 main            { @include main; }
 aside           { @include sidebar; }
 aside ul        { @include sidebar-list; }
+.modal          { @include modal; }
 
 @import 'pod-styles';
 
@@ -59,6 +60,24 @@ input[type='range'] {
 
 }
 
+.modal-list {
+
+  margin-bottom: $spacing-normal;
+
+  a {
+    display: block;
+    padding: $spacing-normal;
+
+    font-size: 1.5rem;
+
+    &:hover {
+      background-color: $color-background-bright;
+      color: white;
+    }
+  }
+
+}
+
 a.icon,
 button.icon {
   display: flex;
@@ -70,4 +89,9 @@ button.icon {
   background: none;
   border: 1px solid currentColor;
   border-radius: 100%;
+
+  &.danger {
+    border-color: #5c3535;
+    color: #b34f4f;
+  }
 }

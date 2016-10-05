@@ -1,7 +1,5 @@
 form.modal {
 
-  width: 250px;
-
   p {
     display: flex;
     flex-direction: column;
@@ -11,7 +9,7 @@ form.modal {
     margin-top: $spacing-normal;
   }
 
-  label {
+  label:not(.radio) {
     margin-bottom: $spacing-close;
 
     color: $color-foreground-dim;
@@ -19,27 +17,52 @@ form.modal {
     font-style: oblique;
   }
 
+  label.radio {
+    display: flex;
+    align-items: center;
+    padding: $spacing-close 0;
+
+    color: $color-foreground-dim;
+    cursor: pointer;
+
+    * + * {
+      margin-right: $spacing-close;
+    }
+
+    a.icon {
+      color: $color-foreground-dark;
+      .icon { display: none; }
+    }
+
+    input {
+      display: none;
+
+      &:checked ~ * {
+        color: white;
+
+        .icon { display: block; }
+      }
+    }
+  }
+
+  p,
   input {
     padding: 0 $spacing-close;
-
-    background: none;
-    border: none;
-    border-bottom: 1px solid $color-foreground-dark;
 
     font-size: 2.0rem;
 
     &:focus {
       color: white;
-      border-bottom-color: currentColor;
     }
   }
 
-  .actions {
-    flex-direction: row;
-    justify-content: flex-end;
+  input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid $color-foreground-dark;
 
-    * + * {
-      margin-left: $spacing-normal;
+    &:focus {
+      border-bottom-color: currentColor;
     }
   }
 

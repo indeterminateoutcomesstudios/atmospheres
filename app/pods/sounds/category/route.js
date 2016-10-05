@@ -8,7 +8,8 @@ export default Ember.Route.extend({
     return this.get('sounds').getSounds()
       .then(sounds => ({
         name: category_slug,
-        sounds: sounds.filterBy('category', category_slug)
+        sounds: sounds.filterBy('category', category_slug),
+        atmospheres: this.store.findAll('environment')
       }));
   }
 

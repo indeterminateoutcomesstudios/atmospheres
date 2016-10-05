@@ -5,7 +5,9 @@
     <button {{action (toggle 'showEditModal' this)}} class="button">Rename</button>
   </span>
 </h1>
-{{sound-list model=model.sounds}}
+{{#sound-list model=environmentSounds as |sound|}}
+  <button {{action (route-action 'destroySound' sound)}} class="icon danger">{{icon 'delete'}}</button>
+{{/sound-list}}
 {{#if showEditModal}}
   {{#x-modal}}
     <form {{action (route-action 'save') on='submit'}} class="modal">

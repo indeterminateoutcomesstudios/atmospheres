@@ -19,4 +19,8 @@
     color: #b34f4f;
   }
 
+  &[disabled] {
+    opacity: 0.25;
+  }
+
 }

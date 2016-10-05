@@ -2,44 +2,35 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-  sounds: Ember.inject.service(),
-
   model({ atmosphere_id }) {
-    return Ember.RSVP.hash({
-      environment: this.store.findRecord('environment', atmosphere_id),
-      sounds: this.get('sounds').getSounds()
-    });
-  },
-
-  afterModel(model) {
-    let soundPointers = Ember.A();
-    if (!model.environment.get('sounds.length')) { return model; }
-    model.environment.get('sounds').forEach(sound => {
-      soundPointers.push(model.sounds.findBy('name', sound.name));
-    });
-    model.environment.set('sounds', soundPointers);
+    return this.store.findRecord('environment', atmosphere_id);
   },
 
   setupController(controller, model) {
-    this._super(controller, model.environment);
+    this._super(...arguments);
     controller.setProperties({
-      newName: model.environment.get('name'),
+      newName: model.get('name'),
       showEditModal: false
     });
   },
 
   actions: {
     save() {
-      let { environment } = this.currentModel;
-      environment.set('name', this.controller.get('newName'));
-      environment.save();
+      this.currentModel.set('name', this.controller.get('newName'));
+      this.currentModel.save();
       this.controller.set('showEditModal', false);
     },
     destroy() {
       if (!window.confirm('Are you sure you want to delete this Atmosphere?')) { return; }
-      let { environment } = this.currentModel;
-      environment.destroyRecord();
+      this.currentModel.destroyRecord();
       this.transitionTo('atmospheres');
+    },
+    destroySound(soundPointer) {
+      if (!window.confirm('Are you sure you want to remove this sound?')) { return; }
+      let sounds = this.currentModel.get('sounds'),
+          sound = sounds.findBy('name', soundPointer.get('name'));
+      sounds.removeObject(sound);
+      this.currentModel.save();
     }
   }
 

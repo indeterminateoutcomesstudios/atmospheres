@@ -5,9 +5,12 @@
         {{icon 'stop' class='stop'}}
         {{icon 'play' class='play'}}
       </button>
-      {{sound.name}}
+      <span>{{sound.name}}</span>
     </span>
-    {{input type='range' min=0 max=1 step=0.01 value=sound.volume}}
+    <span>
+      {{input type='range' min=0 max=1 step=0.01 value=sound.volume}}
+      {{#if hasBlock}}{{yield sound}}{{/if}}
+    </span>
   </li>
 {{/each}}
 {{#unless model.length}}

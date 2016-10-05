@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .a {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>menu</title>
+  <g>
+    <circle class="a" cx="10" cy="10" r="1.5"/>
+    <circle class="a" cx="15.5" cy="10" r="1.5"/>
+    <circle class="a" cx="4.5" cy="10" r="1.5"/>
+  </g>
+</svg>

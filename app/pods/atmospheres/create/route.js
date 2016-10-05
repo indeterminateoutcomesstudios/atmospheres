@@ -4,6 +4,11 @@ export default Ember.Route.extend({
 
   sounds: Ember.inject.service(),
 
+  setupController(controller) {
+    controller.set('name', null);
+    this._super(...arguments);
+  },
+
   actions: {
     create() {
       let name = this.controller.get('name');
