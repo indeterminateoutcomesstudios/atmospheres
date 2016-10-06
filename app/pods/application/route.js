@@ -17,7 +17,23 @@ export default Ember.Route.extend({
       // HACK: The 'player' service doesn't know about all the playing sounds,
       // but will need to stop sounds that aren't in the current environment.
       this.get('player').playEnvironment(this.currentModel, environment);
-    }
+    },
+    showCreateModal() {
+      this.controller.setProperties({
+        showCreateModal: true,
+        name: null
+      });
+    },
+    createAtmosphere() {
+      let name = this.controller.get('name');
+      if (!name) { return; }
+      // this.get('sounds').getSounds().then(allSounds => {
+        let sounds = this.currentModel.filterBy('playing')
+          .map(s => s.getProperties('name', 'volume'));
+        this.store.createRecord('environment', { name, sounds }).save();
+        this.controller.set('showCreateModal', false);
+      // });
+    },
   }
 
 });

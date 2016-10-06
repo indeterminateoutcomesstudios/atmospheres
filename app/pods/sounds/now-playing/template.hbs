@@ -1,4 +1,5 @@
 <header>
   <h1>{{model.name}}</h1>
+  <button {{action (route-action 'showCreateModal')}} class="button" disabled={{unless model.sounds.length true false}}>Create Atmosphere</button>
 </header>
 {{sound-list model=model.sounds}}

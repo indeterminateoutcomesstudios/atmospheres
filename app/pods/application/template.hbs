@@ -11,7 +11,7 @@
     <footer>
       <button class="icon" {{action (action 'stopAll')}} disabled={{unless playingSounds true false}}>{{icon 'stop'}}</button>
       {{input type='range' min=0 max=1 step=0.01 value=player.masterVolume class='active'}}
-      <button class="icon" {{action (action 'showCreateModal')}} disabled={{unless playingSounds true false}}>{{icon 'add'}}</button>
+      <button class="icon" {{action (route-action 'showCreateModal')}} disabled={{unless playingSounds true false}}>{{icon 'add'}}</button>
     </footer>
   </aside>
   <main>
@@ -19,14 +19,14 @@
       {{outlet}}
       {{#if showCreateModal}}
         {{#x-modal}}
-          <form {{action (route-action 'create') on='submit'}} class="modal">
+          <form {{action (route-action 'createAtmosphere') on='submit'}} class="modal">
             <p>
               <label for="name">Name</label>
               {{input id='name' value=name}}
             </p>
             <p class="actions">
               <button {{action (action 'hideCreateModal')}} class="button">Cancel</button>
-              <button {{action (action 'createAtmosphere')}} type="submit" class="button primary">Save</button>
+              <button type="submit" class="button primary">Save</button>
             </p>
           </form>
         {{/x-modal}}
