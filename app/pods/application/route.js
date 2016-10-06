@@ -6,28 +6,17 @@ export default Ember.Route.extend({
   player: Ember.inject.service(),
 
   model() {
-    return Ember.RSVP.hash({
-      sounds: this.get('sounds').getSounds(),
-      environments: this.store.findAll('environment')
-    });
+    return this.get('sounds').getSounds();
   },
 
   actions: {
     play(sound) {
       this.get('player').play(sound);
     },
-    stopAll() {
-      let model = this.modelFor(this.routeName);
-      model.sounds.filterBy('playing').forEach(s => s.stop());
-    },
-    deleteEnvironment(environment) {
-      environment.destroyRecord();
-    },
     playEnvironment(environment) {
       // HACK: The 'player' service doesn't know about all the playing sounds,
       // but will need to stop sounds that aren't in the current environment.
-      let model = this.modelFor(this.routeName);
-      this.get('player').playEnvironment(model.sounds, environment);
+      this.get('player').playEnvironment(this.currentModel, environment);
     }
   }
 

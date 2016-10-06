@@ -9,7 +9,9 @@ export default Ember.Controller.extend({
     addSoundToAtmosphere() {
       let atmosphere = this.get('targetAtmosphere'),
           soundToAdd = this.get('soundToAdd');
-      if (atmosphere.get('sounds').findBy('name', soundToAdd.name)) { return; }
+      if (atmosphere.get('sounds').findBy('name', soundToAdd.name)) {
+        return;
+      }
       atmosphere.get('sounds').pushObject(soundToAdd);
       atmosphere.save();
       this.setProperties({

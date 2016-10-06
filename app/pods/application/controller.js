@@ -6,6 +6,8 @@ export default Ember.Controller.extend({
   sounds: Ember.inject.service(),
   showCreateModal: false,
 
+  playingSounds: Ember.computed.filterBy('model', 'playing'),
+
   actions: {
     createAtmosphere() {
       let name = this.get('name');
@@ -16,6 +18,9 @@ export default Ember.Controller.extend({
         this.store.createRecord('environment', { name, sounds }).save();
         this.set('showCreateModal', false);
       });
+    },
+    stopAll() {
+      this.get('playingSounds').invoke('stop');
     },
     showCreateModal() {
       this.setProperties({

@@ -19,8 +19,9 @@
     color: #b34f4f;
   }
 
-  &[disabled] {
-    opacity: 0.25;
-  }
+}
 
+button[disabled],
+.button[disabled] {
+  opacity: 0.25;
 }

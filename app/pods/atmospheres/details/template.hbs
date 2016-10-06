@@ -1,10 +1,10 @@
-<h1>
-  {{model.name}}
-  <span class="actions">
-    <button {{action (route-action 'destroy')}} class="button danger">Delete</button>
-    <button {{action (toggle 'showEditModal' this)}} class="button">Rename</button>
-  </span>
-</h1>
+<header>
+  <h1>{{model.name}}</h1>
+  <button {{action (route-action 'playEnvironment' model)}} class="icon">{{icon 'play'}}</button>
+  <span class="spacer"></span>
+  <button {{action (route-action 'destroy')}} class="button danger">Delete</button>
+  <button {{action (toggle 'showEditModal' this)}} class="button">Rename</button>
+</header>
 {{#sound-list model=environmentSounds as |sound|}}
   <button {{action (route-action 'destroySound' sound)}} class="icon danger">{{icon 'delete'}}</button>
 {{/sound-list}}

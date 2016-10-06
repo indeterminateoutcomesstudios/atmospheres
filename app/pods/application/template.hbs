@@ -9,8 +9,9 @@
   <aside>
     <div id="sidebar"></div>
     <footer>
+      <button class="icon" {{action (action 'stopAll')}} disabled={{unless playingSounds true false}}>{{icon 'stop'}}</button>
       {{input type='range' min=0 max=1 step=0.01 value=player.masterVolume class='active'}}
-      <button class="icon" {{action (action 'showCreateModal')}}>{{icon 'add'}}</button>
+      <button class="icon" {{action (action 'showCreateModal')}} disabled={{unless playingSounds true false}}>{{icon 'add'}}</button>
     </footer>
   </aside>
   <main>

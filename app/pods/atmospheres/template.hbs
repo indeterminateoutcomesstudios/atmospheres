@@ -4,8 +4,13 @@
     {{#link-to 'atmospheres.create' class='icon'}}{{icon 'add'}}{{/link-to}}
   </h2>
   <ul>
-    {{#each model as |environment|}}
-      <li>{{#link-to 'atmospheres.details' environment.id}}{{environment.name}}{{/link-to}}</li>
+    {{#each (sort-by 'name' model) as |environment|}}
+      <li>
+        {{#link-to 'atmospheres.details' environment.id}}
+          {{environment.name}}
+        {{/link-to}}
+        <button class="icon" {{action (route-action 'playEnvironment' environment) bubbles='false'}}>{{icon 'play'}}</button>
+      </li>
     {{/each}}
   </ul>
 {{/ember-wormhole}}

@@ -1,4 +1,6 @@
-<h1>{{model.name}}</h1>
+<header>
+  <h1>{{model.name}}</h1>
+</header>
 {{#sound-list model=model.sounds as |sound|}}
   <button {{action (action 'showAtmospheres' sound)}} class="icon">{{icon 'add'}}</button>
 {{/sound-list}}
