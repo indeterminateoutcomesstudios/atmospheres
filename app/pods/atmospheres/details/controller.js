@@ -19,6 +19,15 @@ export default Ember.Controller.extend({
       }
       return sound;
     });
-  })
+  }),
+
+  actions: {
+    showSoundDeleteConfirmation(sound) {
+      this.set('showSoundDeleteConfirmation', sound);
+    },
+    cancelSoundDeleteConfirmation() {
+      this.set('showSoundDeleteConfirmation', null);
+    }
+  }
 
 });

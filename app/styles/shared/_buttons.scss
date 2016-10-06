@@ -9,6 +9,7 @@
 
   color: $color-foreground-dim;
   font-size: 1.4rem;
+  line-height: 1;
 
   &.primary {
     color: white;
@@ -17,6 +18,10 @@
   &.danger {
     border-color: #5c3535;
     color: #b34f4f;
+
+    .modal & {
+      border-color: #b34f4f;
+    }
   }
 
 }
