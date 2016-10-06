@@ -2,8 +2,21 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+  sounds: Ember.inject.controller(),
+
   soundToAdd: null,
   targetAtmosphere: null,
+
+  filteredSounds: Ember.computed('model.sounds.@each.name', 'sounds.filter', function() {
+    let allSounds = this.get('model.sounds'),
+        filter = this.get('sounds.filter');
+    if (!filter) {
+      return allSounds;
+    }
+    return allSounds.filter(sound => {
+      return sound.get('name').toLowerCase().indexOf(filter.toLowerCase()) > -1;
+    });
+  }),
 
   actions: {
     addSoundToAtmosphere() {

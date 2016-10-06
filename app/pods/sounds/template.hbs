@@ -1,5 +1,6 @@
 {{#ember-wormhole to='sidebar'}}
   <h2>Categories</h2>
+  {{input type='search' value=filter placeholder='Search'}}
   <ul>
     <li>{{#link-to 'sounds.now-playing' class='de-em'}}Now Playing{{/link-to}}</li>
     {{#each categories as |category|}}

@@ -1,3 +1,29 @@
+[type='search'] {
+  display: block;
+  margin: 0 $spacing-comfy $spacing-comfy;
+  padding: 0 $spacing-comfy;
+  height: 30px;
+  width: calc(100% - #{$spacing-comfy * 2});
+
+  background: none;
+  border: 1px solid $color-background-light;
+  border-radius: 15px;
+  -webkit-appearance: none;
+
+  color: white;
+  font-size: 1.6rem;
+
+  @mixin placeholder {
+    color: $color-foreground-dark;
+    text-align: center;
+  }
+
+  &::-webkit-input-placeholder { @include placeholder; }
+  &:-moz-placeholder           { @include placeholder; }
+  &::-moz-placeholder          { @include placeholder; }
+  &:-ms-input-placeholder      { @include placeholder; }
+}
+
 form.modal {
 
   p {
