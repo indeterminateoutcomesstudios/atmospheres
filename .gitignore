@@ -12,6 +12,7 @@
 /public/sounds/*
 
 # misc
+/.eyeglass_cache
 /.sass-cache
 /connect.lock
 /coverage/*
