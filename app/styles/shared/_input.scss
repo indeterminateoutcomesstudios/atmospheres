@@ -1,7 +1,7 @@
 [type='search'] {
   display: block;
-  margin: 0 $spacing-comfy $spacing-comfy;
-  padding: 0 $spacing-comfy;
+  margin: $spacing-comfy;
+  padding: 0 $spacing-normal;
   height: 30px;
   width: calc(100% - #{$spacing-comfy * 2});
 

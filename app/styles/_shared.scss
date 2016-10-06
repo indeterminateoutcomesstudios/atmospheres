@@ -16,6 +16,9 @@
 
   background-color: $color-primary;
 
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+
   h1 {
     color: white;
     font-size: 1.6rem;
@@ -38,6 +41,8 @@
 
     font-size: 1.6rem;
     font-weight: 300;
+
+    -webkit-app-region: no-drag;
 
     a {
       display: flex;
