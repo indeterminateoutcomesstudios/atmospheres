@@ -1,11 +1,11 @@
 {{#each (sort-by 'name' model) as |sound|}}
   <li class="{{if sound.playing 'active'}}">
-    <span class="name" {{action (route-action 'play' sound)}}>
-      <button class="icon status">
+    <span {{action (route-action 'play' sound)}}>
+      <button class="icon action">
         {{icon 'stop' class='stop'}}
         {{icon 'play' class='play'}}
       </button>
-      <span>{{sound.name}}</span>
+      <span class="name">{{sound.name}}</span>
     </span>
     <span>
       {{input type='range' min=0 max=1 step=0.01 value=sound.volume}}

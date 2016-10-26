@@ -4,6 +4,9 @@ export default Ember.Controller.extend({
 
   allCategories: Ember.computed.mapBy('filteredModel', 'category'),
   categories: Ember.computed.uniq('allCategories'),
+  sortedCategories: Ember.computed('categories', function() {
+    return this.get('categories').sort();
+  }),
 
   filter: null,
   filteredModel: Ember.computed('model.@each', 'filter', function() {

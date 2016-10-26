@@ -2,7 +2,7 @@
   {{input type='search' value=filter placeholder='Search'}}
   <ul>
     <li>{{#link-to 'sounds.now-playing' class='de-em'}}Now Playing{{/link-to}}</li>
-    {{#each categories as |category|}}
+    {{#each sortedCategories as |category|}}
       <li>{{#link-to 'sounds.category' category}}{{category}}{{/link-to}}</li>
     {{/each}}
   </ul>
