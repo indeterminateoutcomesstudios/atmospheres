@@ -1,26 +1,28 @@
-<header>
-  <h1>{{model.name}}</h1>
-</header>
-{{#sound-list model=filteredSounds as |sound|}}
-  <button {{action (action 'showAtmospheres' sound)}} class="icon">{{icon 'add'}}</button>
-{{/sound-list}}
-{{#if showAtmospherePicker}}
-  {{#x-modal}}
-    <form class="modal">
-      <p>
-        <label>Choose an Atmosphere</label>
-        {{#each model.atmospheres as |atmosphere|}}
-          <label class="radio">
-            {{radio-button value=atmosphere groupValue=targetAtmosphere}}
-            <a class="icon">{{icon 'radio'}}</a>
-            <span>{{atmosphere.name}}</span>
-          </label>
-        {{/each}}
-      </p>
-      <p class="actions">
-        <button {{action (toggle 'showAtmospherePicker' this)}} class="button">Cancel</button>
-        <button {{action (action 'addSoundToAtmosphere')}} class="button primary" disabled={{unless targetAtmosphere true false}}>Add</button>
-      </p>
-    </form>
-  {{/x-modal}}
-{{/if}}
+{{#liquid-bind model use='offset-fade' class='liquid-main' enableGrowth=false as |currentModel|}}
+  <header class="constrained">
+    <h1>{{currentModel.name}}</h1>
+  </header>
+  {{#sound-list currentFilter=sounds.filter sounds=currentModel.sounds class='constrained' as |sound|}}
+    <button {{action (action 'showAtmospheres' sound)}} class="icon">{{icon 'add'}}</button>
+  {{/sound-list}}
+  {{#if showAtmospherePicker}}
+    {{#x-modal}}
+      <form class="modal">
+        <p>
+          <label>Choose an Atmosphere</label>
+          {{#each currentModel.atmospheres as |atmosphere|}}
+            <label class="radio">
+              {{radio-button value=atmosphere groupValue=targetAtmosphere}}
+              <a class="icon">{{icon 'radio'}}</a>
+              <span>{{atmosphere.name}}</span>
+            </label>
+          {{/each}}
+        </p>
+        <p class="actions">
+          <button {{action (toggle 'showAtmospherePicker' this)}} class="button">Cancel</button>
+          <button {{action (action 'addSoundToAtmosphere')}} class="button primary" disabled={{unless targetAtmosphere true false}}>Add</button>
+        </p>
+      </form>
+    {{/x-modal}}
+  {{/if}}
+{{/liquid-bind}}

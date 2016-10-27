@@ -2,14 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
+  sounds: Ember.inject.service(),
+
   model({ atmosphere_id }) {
-    return this.store.findRecord('environment', atmosphere_id);
+    return this.store.findRecord('environment', atmosphere_id)
+      .then(environment => Ember.RSVP.hash({
+        environment,
+        sounds: this.get('sounds').getSoundsForEnvironment(environment)
+      }));
   },
 
-  setupController(controller, model) {
-    this._super(...arguments);
+  setupController(controller, { environment, sounds }) {
+    this._super(controller, { ...environment.toJSON(), sounds: sounds });
     controller.setProperties({
-      newName: model.get('name'),
+      newName: environment.get('name'),
       showDeleteConfirmation: false,
       showSoundDeleteConfirmation: null,
       showEditModal: false

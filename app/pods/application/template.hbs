@@ -15,22 +15,20 @@
     </footer>
   </aside>
   <main>
-    <div class="constrained">
-      {{outlet}}
-      {{#if showCreateModal}}
-        {{#x-modal}}
-          <form {{action (route-action 'createAtmosphere') on='submit'}} class="modal">
-            <p>
-              <label for="name">Name</label>
-              {{input id='name' value=name}}
-            </p>
-            <p class="actions">
-              <button {{action (action 'hideCreateModal')}} class="button">Cancel</button>
-              <button type="submit" class="button primary">Save</button>
-            </p>
-          </form>
-        {{/x-modal}}
-      {{/if}}
-    </div>
+    {{outlet}}
+    {{#if showCreateModal}}
+      {{#x-modal}}
+        <form {{action (route-action 'createAtmosphere') on='submit'}} class="modal">
+          <p>
+            <label for="name">Name</label>
+            {{input id='name' value=name}}
+          </p>
+          <p class="actions">
+            <button {{action (action 'hideCreateModal')}} class="button">Cancel</button>
+            <button type="submit" class="button primary">Save</button>
+          </p>
+        </form>
+      {{/x-modal}}
+    {{/if}}
   </main>
 </div>

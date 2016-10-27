@@ -85,3 +85,14 @@ button.icon {
     color: #b34f4f;
   }
 }
+
+.liquid-container,
+.liquid-child {
+  height: 100%;
+  overflow: initial;
+}
+
+.liquid-main {
+  overflow-y: auto;
+  padding: $spacing-comfy 0;
+}

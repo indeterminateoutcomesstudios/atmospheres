@@ -54,6 +54,7 @@
     "ember-route-action-helper": "0.3.2",
     "ember-transition-helper": "0.0.6",
     "ember-wormhole": "0.4.1",
+    "liquid-fire": "0.26.4",
     "loader.js": "^4.0.1",
     "ms-styles": "magic-stash/styles#master",
     "phantomjs-prebuilt": "^2.1.7"

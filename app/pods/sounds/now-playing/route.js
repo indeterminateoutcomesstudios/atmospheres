@@ -5,11 +5,11 @@ export default Ember.Route.extend({
   sounds: Ember.inject.service(),
 
   model() {
-    return this.get('sounds').getSounds()
-      .then(sounds => ({
-        name: 'Now Playing',
-        sounds: sounds.filterBy('playing', true)
-      }));
+    return this.get('sounds').getSounds();
+  },
+
+  setupController(controller, model) {
+    this._super(controller, model.filterBy('playing'));
   }
 
 });

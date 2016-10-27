@@ -1,4 +1,4 @@
-{{#each (sort-by 'name' model) as |sound|}}
+{{#each (sort-by 'name' filteredSounds) as |sound|}}
   <li class="{{if sound.playing 'active'}}">
     <span {{action (route-action 'play' sound)}}>
       <button class="icon action">
@@ -13,6 +13,6 @@
     </span>
   </li>
 {{/each}}
-{{#unless model.length}}
+{{#unless filteredSounds.length}}
   <li class="de-em">Nothing to show.</li>
 {{/unless}}

@@ -33,6 +33,18 @@ export default Ember.Service.extend({
     });
   },
 
+  getSoundsForEnvironment(environment) {
+    return this.getSounds().then(allSounds => {
+      return environment.get('sounds').map(({ name, volume }) => {
+        let sound = allSounds.findBy('name', name);
+        if (volume) {
+          sound.set('volume', volume);
+        }
+        return sound;
+      });
+    });
+  },
+
   _getSoundsFromStubs() {
     return Ember.RSVP.Promise.resolve([
       { name: 'Rain (Drizzle)',  category: 'Weather', url: 'weather/rain-drizzle.wav' },
