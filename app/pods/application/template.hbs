@@ -16,6 +16,7 @@
   </aside>
   <main>
     {{outlet}}
+    <div id="modal"></div>
     {{#if showCreateModal}}
       {{#x-modal}}
         <form {{action (route-action 'createAtmosphere') on='submit'}} class="modal">

@@ -1,7 +1,9 @@
 <div class="liquid-main">
-  <header class="constrained">
-    <h1>Now Playing</h1>
-    <button {{action (route-action 'showCreateModal')}} class="button" disabled={{unless model.length true false}}>Create Atmosphere</button>
-  </header>
-  {{sound-list sounds=model class='constrained'}}
+  <div class="liquid-child">
+    <header class="constrained">
+      <h1>Now Playing</h1>
+      <button {{action (route-action 'showCreateModal')}} class="button" disabled={{unless model.length true false}}>Create Atmosphere</button>
+    </header>
+    {{sound-list sounds=model class='constrained'}}
+  </div>
 </div>

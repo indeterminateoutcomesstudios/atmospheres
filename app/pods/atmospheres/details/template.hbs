@@ -9,8 +9,8 @@
   {{#sound-list sounds=currentModel.sounds class='constrained' as |sound|}}
     <button {{action (action 'showSoundDeleteConfirmation' sound)}} class="icon danger">{{icon 'delete'}}</button>
   {{/sound-list}}
-  {{#if showEditModal}}
-    {{#x-modal}}
+  {{#ember-wormhole to='modal'}}
+    {{#x-modal class=(if showEditModal 'shown' 'hidden')}}
       <form {{action (route-action 'save') on='submit'}} class="modal">
         <p>
           <label for="name">Name</label>
@@ -22,9 +22,7 @@
         </p>
       </form>
     {{/x-modal}}
-  {{/if}}
-  {{#if showDeleteConfirmation}}
-    {{#x-modal}}
+    {{#x-modal class=(if showDeleteConfirmation 'shown' 'hidden')}}
       <form class="modal">
         <p>Are you sure you want to delete this atmosphere?</p>
         <p class="actions">
@@ -33,9 +31,7 @@
         </p>
       </form>
     {{/x-modal}}
-  {{/if}}
-  {{#if showSoundDeleteConfirmation}}
-    {{#x-modal}}
+    {{#x-modal class=(if showSoundDeleteConfirmation 'shown' 'hidden')}}
       <form class="modal">
         <p>Are you sure you want to delete this sound?</p>
         <p class="actions">
@@ -44,5 +40,5 @@
         </p>
       </form>
     {{/x-modal}}
-  {{/if}}
+  {{/ember-wormhole}}
 {{/liquid-bind}}

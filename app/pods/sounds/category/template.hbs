@@ -5,8 +5,8 @@
   {{#sound-list currentFilter=sounds.filter sounds=currentModel.sounds class='constrained' as |sound|}}
     <button {{action (action 'showAtmospheres' sound)}} class="icon">{{icon 'add'}}</button>
   {{/sound-list}}
-  {{#if showAtmospherePicker}}
-    {{#x-modal}}
+  {{#ember-wormhole to='modal'}}
+    {{#x-modal class=(if showAtmospherePicker 'shown' 'hidden')}}
       <form class="modal">
         <p>
           <label>Choose an Atmosphere</label>
@@ -24,5 +24,5 @@
         </p>
       </form>
     {{/x-modal}}
-  {{/if}}
+  {{/ember-wormhole}}
 {{/liquid-bind}}

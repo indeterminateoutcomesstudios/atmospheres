@@ -92,7 +92,7 @@ button.icon {
   overflow: initial;
 }
 
-.liquid-main {
+.liquid-main > .liquid-child {
   overflow-y: auto;
   padding: $spacing-comfy 0;
 }

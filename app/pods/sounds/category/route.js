@@ -11,6 +11,12 @@ export default Ember.Route.extend({
         sounds: sounds.filterBy('category', category_slug),
         atmospheres: this.store.findAll('environment')
       }));
+  },
+
+  actions: {
+    willTransition() {
+      this.controller.set('showAtmospherePicker', false);
+    }
   }
 
 });
