@@ -27,12 +27,13 @@ export default Ember.Route.extend({
     createAtmosphere() {
       let name = this.controller.get('name');
       if (!name) { return; }
-      // this.get('sounds').getSounds().then(allSounds => {
-        let sounds = this.currentModel.filterBy('playing')
-          .map(s => s.getProperties('name', 'volume'));
-        this.store.createRecord('environment', { name, sounds }).save();
+      let sounds = this.currentModel.filterBy('playing')
+        .map(s => s.getProperties('name', 'volume'));
+      this.store.createRecord('environment', { name, sounds }).save().then(atmos => {
         this.controller.set('showCreateModal', false);
-      // });
+        this.transitionTo('atmospheres.details', atmos.id);
+      });
+
     },
   }
 

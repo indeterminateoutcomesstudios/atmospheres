@@ -17,12 +17,12 @@
   <main>
     {{outlet}}
     <div id="modal"></div>
-    {{#if showCreateModal}}
-      {{#x-modal}}
+    {{#ember-wormhole to='modal'}}
+      {{#x-modal class=(if showCreateModal 'shown' 'hidden') as |id|}}
         <form {{action (route-action 'createAtmosphere') on='submit'}} class="modal">
           <p>
-            <label for="name">Name</label>
-            {{input id='name' value=name}}
+            <label for="{{id}}_name">Name</label>
+            {{input id=(concat id '_name') value=name}}
           </p>
           <p class="actions">
             <button {{action (action 'hideCreateModal')}} class="button">Cancel</button>
@@ -30,6 +30,6 @@
           </p>
         </form>
       {{/x-modal}}
-    {{/if}}
+    {{/ember-wormhole}}
   </main>
 </div>

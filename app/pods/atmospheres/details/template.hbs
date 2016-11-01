@@ -1,6 +1,6 @@
 {{#liquid-bind model use='offset-fade' class='liquid-main' enableGrowth=false as |currentModel|}}
   <header class="constrained">
-    <h1>{{currentModel.name}}</h1>
+    <h1>{{currentModel.environment.name}}</h1>
     <button {{action (route-action 'playEnvironment' currentModel)}} class="icon">{{icon 'play'}}</button>
     <span class="spacer"></span>
     <button {{action (toggle 'showDeleteConfirmation' this)}} class="button danger">Delete</button>
@@ -10,11 +10,11 @@
     <button {{action (action 'showSoundDeleteConfirmation' sound)}} class="icon danger">{{icon 'delete'}}</button>
   {{/sound-list}}
   {{#ember-wormhole to='modal'}}
-    {{#x-modal class=(if showEditModal 'shown' 'hidden')}}
+    {{#x-modal class=(if showEditModal 'shown' 'hidden') as |id|}}
       <form {{action (route-action 'save') on='submit'}} class="modal">
         <p>
-          <label for="name">Name</label>
-          {{input id='name' value=newName}}
+          <label for="{{id}}_name">Name</label>
+          {{input id=(concat id '_name') value=newName}}
         </p>
         <p class="actions">
           <button {{action (toggle 'showEditModal' this)}} class="button">Cancel</button>

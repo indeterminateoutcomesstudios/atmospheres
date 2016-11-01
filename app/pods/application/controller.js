@@ -13,6 +13,9 @@ export default Ember.Controller.extend({
       this.get('playingSounds').invoke('stop');
     },
     hideCreateModal() {
+      if (this.get('currentPath') === 'atmospheres.create') {
+        this.transitionToRoute('atmospheres');
+      }
       this.set('showCreateModal', false);
     }
   }

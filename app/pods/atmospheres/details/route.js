@@ -12,8 +12,8 @@ export default Ember.Route.extend({
       }));
   },
 
-  setupController(controller, { environment, sounds }) {
-    this._super(controller, { ...environment.toJSON(), sounds: sounds });
+  setupController(controller, { environment }) {
+    this._super(...arguments);
     controller.setProperties({
       newName: environment.get('name'),
       showDeleteConfirmation: false,
@@ -24,19 +24,20 @@ export default Ember.Route.extend({
 
   actions: {
     save() {
-      this.currentModel.set('name', this.controller.get('newName'));
-      this.currentModel.save();
+      this.currentModel.environment.set('name', this.controller.get('newName'));
+      this.currentModel.environment.save();
       this.controller.set('showEditModal', false);
     },
     destroy() {
-      this.currentModel.destroyRecord();
+      this.controller.set('showDeleteConfirmation', false);
+      this.currentModel.environment.destroyRecord();
       this.transitionTo('atmospheres');
     },
     destroySound(soundPointer) {
-      let sounds = this.currentModel.get('sounds'),
+      let sounds = this.currentModel.environment.get('sounds'),
           sound = sounds.findBy('name', soundPointer.get('name'));
       sounds.removeObject(sound);
-      this.currentModel.save();
+      this.currentModel.environment.save();
       this.controller.set('showSoundDeleteConfirmation', null);
     }
   }
