@@ -1,11 +1,7 @@
 import Ember from 'ember';
 
-let electronApp;
-try {
-  electronApp = require('electron').ipcRenderer;
-} catch(err) {
-  Ember.Logger.debug('`electron` module not loaded; not running in Electron?');
-}
+let electron = requireNode('electron');
+let electronApp = electron ? electron.ipcRenderer : null;
 
 import Sound from 'ms-environments/models/sound';
 import IntermittentSound from 'ms-environments/models/intermittent-sound';

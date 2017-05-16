@@ -1,12 +1,7 @@
 import Ember from 'ember';
 import fetch from 'fetch';
 
-let fs;
-try {
-  fs = require('fs');
-} catch(err) {
-  Ember.Logger.debug('`fs` module not loaded; not running in Electron?');
-}
+let fs = requireNode('fs');
 
 import config from 'ms-environments/config/environment';
 
