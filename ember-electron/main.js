@@ -1,47 +1,47 @@
-'use strict';
-
-let { app, BrowserWindow, ipcMain } = require('electron');
-let path = require('path');
-let recursive = require('recursive-readdir');
-let dirname = __dirname || path.resolve(path.dirname());
-let emberAppLocation = `file://${dirname}/dist/index.html`;
+/* eslint-env node */
+const { app, BrowserWindow, ipcMain, protocol } = require('electron');
+const { dirname, join, resolve } = require('path');
+const protocolServe = require('electron-protocol-serve');
+const recursive = require('recursive-readdir');
 
 let mainWindow = null;
 
+// Registering a protocol & schema to serve our Ember application
+protocol.registerStandardSchemes(['serve'], { secure: true });
+protocolServe({
+  cwd: join(__dirname || resolve(dirname('')), '..', 'ember'),
+  app,
+  protocol,
+});
+
 // Uncomment the lines below to enable Electron's crash reporter
 // For more information, see http://electron.atom.io/docs/api/crash-reporter/
-
 // electron.crashReporter.start({
-//   productName: 'YourName',
-//   companyName: 'YourCompany',
-//   submitURL: 'https://your-domain.com/url-to-submit',
-//   autoSubmit: true
+//     productName: 'YourName',
+//     companyName: 'YourCompany',
+//     submitURL: 'https://your-domain.com/url-to-submit',
+//     autoSubmit: true
 // });
 
-app.on('window-all-closed', function onWindowAllClosed() {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on('ready', function onReady() {
+app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    titleBarStyle: 'hidden-inset'
+    titleBarStyle: 'hidden-inset',
   });
-
-  delete mainWindow.module;
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
 
-  // By default, we'll open the Ember App by directly going to the
-  // file system.
-  //
-  // Please ensure that you have set the locationType option in the
-  // config/environment.js file to 'hash'. For more information,
-  // please consult the ember-electron readme.
+  const emberAppLocation = 'serve://dist';
+
+  // Load the ember application using our custom protocol/scheme
   mainWindow.loadURL(emberAppLocation);
 
   // If a loading operation goes wrong, we'll send Electron back to
@@ -65,27 +65,6 @@ app.on('ready', function onReady() {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
-  });
-
-  // Handle an unhandled error in the main thread
-  //
-  // Note that 'uncaughtException' is a crude mechanism for exception handling intended to
-  // be used only as a last resort. The event should not be used as an equivalent to
-  // "On Error Resume Next". Unhandled exceptions inherently mean that an application is in
-  // an undefined state. Attempting to resume application code without properly recovering
-  // from the exception can cause additional unforeseen and unpredictable issues.
-  //
-  // Attempting to resume normally after an uncaught exception can be similar to pulling out
-  // of the power cord when upgrading a computer -- nine out of ten times nothing happens -
-  // but the 10th time, the system becomes corrupted.
-  //
-  // The correct use of 'uncaughtException' is to perform synchronous cleanup of allocated
-  // resources (e.g. file descriptors, handles, etc) before shutting down the process. It is
-  // not safe to resume normal operation after 'uncaughtException'.
-  process.on('uncaughtException', (err) => {
-    console.log('An exception in the main thread was not handled.');
-    console.log('This is a serious issue that needs to be handled and/or debugged.');
-    console.log(`Exception: ${err}`);
   });
 
   ipcMain.on('sounds:get', (event, arg) => {
@@ -114,8 +93,6 @@ app.on('ready', function onReady() {
           mappedFiles[key].urls.push(file);
         }
 
-        // mappedFiles[key] = fileRecord;
-
       });
 
       let mappedFilesAsArray = Object.keys(mappedFiles)
@@ -126,4 +103,25 @@ app.on('ready', function onReady() {
 
   });
 
+});
+
+// Handle an unhandled error in the main thread
+//
+// Note that 'uncaughtException' is a crude mechanism for exception handling intended to
+// be used only as a last resort. The event should not be used as an equivalent to
+// "On Error Resume Next". Unhandled exceptions inherently mean that an application is in
+// an undefined state. Attempting to resume application code without properly recovering
+// from the exception can cause additional unforeseen and unpredictable issues.
+//
+// Attempting to resume normally after an uncaught exception can be similar to pulling out
+// of the power cord when upgrading a computer -- nine out of ten times nothing happens -
+// but the 10th time, the system becomes corrupted.
+//
+// The correct use of 'uncaughtException' is to perform synchronous cleanup of allocated
+// resources (e.g. file descriptors, handles, etc) before shutting down the process. It is
+// not safe to resume normal operation after 'uncaughtException'.
+process.on('uncaughtException', (err) => {
+  console.log('An exception in the main thread was not handled.');
+  console.log('This is a serious issue that needs to be handled and/or debugged.');
+  console.log(`Exception: ${err}`);
 });

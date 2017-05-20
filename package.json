@@ -16,11 +16,14 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
     "broccoli-asset-rev": "^2.4.5",
-    "electron-packager": "^7.3.0",
-    "electron-prebuilt": "^1.2.7",
-    "electron-rebuild": "^1.1.5",
+    "devtron": "^1.4.0",
+    "electron-prebuilt-compile": "1.6.6",
+    "electron-rebuild": "^1.5.11",
     "ember-ajax": "^3.0.0",
     "ember-cli": "2.13.1",
     "ember-cli-app-version": "^3.0.0",
@@ -39,7 +42,7 @@
     "ember-component-css": "^0.3.3",
     "ember-composable-helpers": "^2.0.1",
     "ember-data": "^2.13.0",
-    "ember-electron": "1.7.1",
+    "ember-electron": "^2.2.1",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^1.5.0",
     "ember-group-by": "0.0.3",
@@ -101,7 +104,12 @@
     "node": ">= 4"
   },
   "dependencies": {
+    "electron-compile": "^6.4.1",
+    "electron-protocol-serve": "^1.3.0",
     "recursive-readdir": "^2.0.0"
   },
-  "private": true
+  "private": true,
+  "config": {
+    "forge": "./ember-electron/electron-forge-config.js"
+  }
 }
