@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { get, set } = Ember;
+
 export default Ember.Service.extend({
 
   masterVolume: Ember.computed({
@@ -16,11 +18,11 @@ export default Ember.Service.extend({
     let context = new AudioContext();
     this.masterGain = context.createGain();
     this.masterGain.connect(context.destination);
-    this.set('context', context);
+    set(this, 'context', context);
   },
 
   play(sound) {
-    if (sound.get('playing')) {
+    if (get(sound, 'playing')) {
       sound.stop();
     } else {
       sound.play(this.masterGain);
@@ -28,18 +30,18 @@ export default Ember.Service.extend({
   },
 
   playEnvironment(allSounds, environment) {
-    let sounds = environment.get('sounds');
+    let sounds = get(environment, 'sounds');
     allSounds.forEach(s => {
-      let soundInEnvironment = sounds.findBy('name', s.get('name'));
+      let soundInEnvironment = sounds.findBy('name', get(s, 'name'));
       if (soundInEnvironment) {
-        s.set('volume', soundInEnvironment.volume);
-        if (!s.get('playing')) {
+        set(s, 'volume', get(soundInEnvironment, 'volume'));
+        if (!get(s, 'playing')) {
           s.play(this.masterGain);
         }
       } else {
         s.stop();
       }
     });
-  }
+  },
 
 });
