@@ -5,6 +5,17 @@ let fs = window.requireNode('fs');
 
 import config from 'ms-environments/config/environment';
 
+/*
+
+  The Web Audio API provides some functions that should work better than what we're using, but...
+  - `exponentialRampToValueAtTime()` doesn't work. At all.
+  - `linearRampToValueAtTime()` ramps _down_ fine, but ramping _up_ is inconsistent.
+  - `setValueCurveAtTime()` works as of this writing, so we're going with that.
+
+  See MDN for details: https://developer.mozilla.org/en-US/docs/Web/API/AudioParam.
+
+*/
+
 export default Ember.Object.extend({
 
   category: '(Uncategorized)',
@@ -15,6 +26,7 @@ export default Ember.Object.extend({
     this._super(...args);
     let gain = this.get('context').createGain(),
         fadeGain = this.get('context').createGain();
+    fadeGain.gain.value = 0;
     fadeGain.connect(gain);
     this.setProperties({ gain, fadeGain });
   },
@@ -38,21 +50,25 @@ export default Ember.Object.extend({
   },
 
   stop() {
+
     let source = this.get('source');
-    if (!source) {
-      return;
-    }
-    let fadeGain = this.get('fadeGain');
-    let { currentTime } = this.get('context');
-    fadeGain.gain
-      .setValueAtTime(1, currentTime)
-      .linearRampToValueAtTime(0, currentTime + this.get('fadeTime'));
+    if (!source) return;
+
+    let { gain } = this.get('fadeGain'),
+        { currentTime } = this.get('context'),
+        fadeCurve = new Float32Array([ gain.value, 0 ]),
+        adjustedFadeTime = gain.value * this.get('fadeTime');
+
+    gain
+      .cancelAndHoldAtTime(currentTime)
+      .setValueCurveAtTime(fadeCurve, currentTime, adjustedFadeTime);
+
     this.set('playing', false);
     Ember.run.later(() => {
       source.stop();
       source.disconnect();
-      this.set('source', null);
-    }, this.get('fadeTime') * 1000);
+    }, adjustedFadeTime * 1000);
+
   },
 
   _loadSound(url) {
@@ -74,26 +90,38 @@ export default Ember.Object.extend({
   },
 
   _playSoundWithFade(buffer, destinationNode, loop = true) {
+
     let { context, gain, fadeGain } = this.getProperties('context', 'gain', 'fadeGain');
     let source = context.createBufferSource();
-    Ember.setProperties(source, { buffer, loop });
+
     source.connect(fadeGain);
     gain.connect(destinationNode);
-    let { currentTime } = context;
+
+    let { currentTime } = context,
+        fadeCurve = new Float32Array([ fadeGain.gain.value, 1 ]),
+        adjustedFadeTime = (1 - fadeGain.gain.value) * this.get('fadeTime');
+
     fadeGain.gain
-      .setValueAtTime(0, currentTime)
-      .linearRampToValueAtTime(1, currentTime + this.get('fadeTime'));
-    source.start(0);
+      .cancelAndHoldAtTime(currentTime)
+      .setValueCurveAtTime(fadeCurve, currentTime, adjustedFadeTime);
+
+    Ember.setProperties(source, { buffer, loop });
+    source.start();
     return source;
+
   },
 
   _playSound(buffer, destinationNode, loop = true) {
+
     let { context, gain } = this.getProperties('context', 'gain');
     let source = context.createBufferSource();
-    Ember.setProperties(source, { buffer, loop });
+
     source.connect(destinationNode);
+
+    Ember.setProperties(source, { buffer, loop });
     source.start(0);
     return source;
+
   }
 
 });
