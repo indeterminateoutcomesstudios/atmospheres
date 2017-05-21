@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-let electron = requireNode('electron');
+let electron = window.requireNode('electron');
 let electronApp = electron ? electron.ipcRenderer : null;
 
 import Sound from 'ms-environments/models/sound';

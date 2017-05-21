@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import fetch from 'fetch';
 
-let fs = requireNode('fs');
+let fs = window.requireNode('fs');
 
 import config from 'ms-environments/config/environment';
 

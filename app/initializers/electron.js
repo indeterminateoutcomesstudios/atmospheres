@@ -1,6 +1,6 @@
 export function initialize() {
   // Polyfill node module lookup
-  requireNode || (requireNode = () => null);
+  window.requireNode || (window.requireNode = () => null);
 }
 
 export default {
