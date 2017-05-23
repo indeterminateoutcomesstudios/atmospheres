@@ -5,21 +5,11 @@ let fs = window.requireNode('fs');
 
 import config from 'ms-environments/config/environment';
 
-/*
-
-  The Web Audio API provides some functions that should work better than what we're using, but...
-  - `exponentialRampToValueAtTime()` doesn't work. At all.
-  - `linearRampToValueAtTime()` ramps _down_ fine, but ramping _up_ is inconsistent.
-  - `setValueCurveAtTime()` works as of this writing, so we're going with that.
-
-  See MDN for details: https://developer.mozilla.org/en-US/docs/Web/API/AudioParam.
-
-*/
-
 export default Ember.Object.extend({
 
   category: '(Uncategorized)',
-  fadeTime: 1.5,
+  fadeInTime:  1.5,
+  fadeOutTime: 3.0,
   playing: false,
 
   init(...args) {
@@ -56,12 +46,12 @@ export default Ember.Object.extend({
 
     let { gain } = this.get('fadeGain'),
         { currentTime } = this.get('context'),
-        fadeCurve = new Float32Array([ gain.value, 0 ]),
-        adjustedFadeTime = gain.value * this.get('fadeTime');
+        adjustedFadeTime = gain.value * this.get('fadeOutTime');
 
     gain
-      .cancelAndHoldAtTime(currentTime)
-      .setValueCurveAtTime(fadeCurve, currentTime, adjustedFadeTime);
+      .cancelScheduledValues(currentTime)
+      .setValueAtTime(gain.value, currentTime)
+      .exponentialRampToValueAtTime(0.001, currentTime + adjustedFadeTime);
 
     this.set('playing', false);
     Ember.run.later(() => {
@@ -98,12 +88,12 @@ export default Ember.Object.extend({
     gain.connect(destinationNode);
 
     let { currentTime } = context,
-        fadeCurve = new Float32Array([ fadeGain.gain.value, 1 ]),
-        adjustedFadeTime = (1 - fadeGain.gain.value) * this.get('fadeTime');
+        adjustedFadeTime = (1 - fadeGain.gain.value) * this.get('fadeInTime');
 
     fadeGain.gain
-      .cancelAndHoldAtTime(currentTime)
-      .setValueCurveAtTime(fadeCurve, currentTime, adjustedFadeTime);
+      .cancelScheduledValues(currentTime)
+      .setValueAtTime(fadeGain.gain.value, currentTime)
+      .linearRampToValueAtTime(1, currentTime + adjustedFadeTime);
 
     Ember.setProperties(source, { buffer, loop });
     source.start();
