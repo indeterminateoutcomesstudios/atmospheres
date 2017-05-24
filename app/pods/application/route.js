@@ -38,7 +38,6 @@ export default Ember.Route.extend({
         this.controller.set('showCreateModal', false);
         this.transitionTo('atmospheres.details', atmos.id);
       });
-
     },
   },
 

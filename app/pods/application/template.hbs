@@ -12,7 +12,7 @@
     <footer>
       <button class="icon" {{action (action 'stopAll')}} disabled={{unless playingSounds true false}}>{{icon 'stop'}}</button>
       {{input type='range' min=0 max=1 step=0.01 value=player.masterVolume class='active'}}
-      <button class="icon" {{action (route-action 'showCreateModal')}} disabled={{unless playingSounds true false}}>{{icon 'add'}}</button>
+      <button class="icon" {{action (toggle-action 'player.muted' this)}}>{{icon (if player.muted 'muted' 'unmuted')}}</button>
     </footer>
   </aside>
   <main>

@@ -1,8 +1,10 @@
 import Ember from 'ember';
 
-const { get, set } = Ember;
+const { get, set, observer } = Ember;
 
 export default Ember.Service.extend({
+
+  muted: false,
 
   masterVolume: Ember.computed({
     get() {
@@ -16,10 +18,16 @@ export default Ember.Service.extend({
   init() {
     let AudioContext = window.AudioContext || window.webkitAudioContext;
     let context = new AudioContext();
+    this.masterMute = context.createGain();
+    this.masterMute.connect(context.destination);
     this.masterGain = context.createGain();
-    this.masterGain.connect(context.destination);
+    this.masterGain.connect(this.masterMute);
     set(this, 'context', context);
   },
+
+  updateMute: observer('muted', function() {
+    this.masterMute.gain.value = get(this, 'muted') ? 0 : 1;
+  }),
 
   play(sound) {
     if (get(sound, 'playing')) {
