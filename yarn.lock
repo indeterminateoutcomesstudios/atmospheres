@@ -3705,6 +3705,12 @@ ember-hash-helper-polyfill@^0.1.2:
     ember-cli-babel "^5.1.7"
     ember-cli-version-checker "^1.2.0"
 
+ember-href-to@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/ember-href-to/-/ember-href-to-1.12.1.tgz#8aa5fc20e29d619120808ff2fc25a087fea5ade3"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+
 ember-inflector@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-2.0.0.tgz#ac0870e87c0724bd42cf5ed7ef166c49a296ecfb"

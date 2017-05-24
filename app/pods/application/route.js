@@ -2,8 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
+  electron: Ember.inject.service(),
   sounds: Ember.inject.service(),
   player: Ember.inject.service(),
+
+  activate() {
+    this.get('electron').on('show:welcome', () => this.transitionTo('index'));
+  },
 
   model() {
     return this.get('sounds').getSounds();
@@ -35,6 +40,6 @@ export default Ember.Route.extend({
       });
 
     },
-  }
+  },
 
 });

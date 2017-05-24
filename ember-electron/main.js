@@ -1,8 +1,9 @@
 /* eslint-env node */
-const { app, BrowserWindow, ipcMain, protocol } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const recursive = require('recursive-readdir');
+const mainMenu = require('./app/menu');
 
 let mainWindow = null;
 
@@ -30,11 +31,14 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     titleBarStyle: 'hidden-inset',
   });
+
+  Menu.setApplicationMenu(mainMenu);
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
