@@ -1,6 +1,6 @@
 /* eslint-env node */
 const { app, BrowserWindow, ipcMain, Menu, protocol } = require('electron');
-const { dirname, join, resolve } = require('path');
+const { dirname, join, resolve, sep } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const recursive = require('recursive-readdir');
 const mainMenu = require('./app/menu');
@@ -72,7 +72,7 @@ app.on('ready', () => {
   });
 
   ipcMain.on('sounds:get', (event, arg) => {
-    let soundsPath = '/Users/Tim/Sounds/';
+    let soundsPath = join(app.getPath('home'), 'Sounds') + sep;
 
     recursive(soundsPath, [ '.DS_Store' ], function (err, files) {
       let mappedFiles = {};
