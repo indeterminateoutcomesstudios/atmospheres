@@ -11,7 +11,11 @@ module.exports = {
       "rpm"
     ]
   },
-  "electronPackagerConfig": {},
+  "electronPackagerConfig": {
+    appCopyright: 'Copyright © 2017 Tim G. Thomas',
+    name: '<%= productName %>',
+    icon: 'ember-electron/resources/icon.icns'
+  },
   "electronWinstallerConfig": {
     "name": ""
   },

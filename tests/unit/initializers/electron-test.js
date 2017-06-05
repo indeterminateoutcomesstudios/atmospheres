@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { initialize } from 'ms-environments/initializers/electron';
+import { initialize } from 'ms-atmospherers/initializers/electron';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
 

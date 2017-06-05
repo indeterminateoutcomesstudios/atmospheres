@@ -2,8 +2,8 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'ms-environments',
-    podModulePrefix: 'ms-environments/pods',
+    modulePrefix: 'ms-atmospherers',
+    podModulePrefix: 'ms-atmospherers/pods',
     environment: environment,
     soundsURL: 'sounds/',
     rootURL: '/',

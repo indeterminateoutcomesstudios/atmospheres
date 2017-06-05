@@ -3,8 +3,8 @@ import Ember from 'ember';
 let electron = window.requireNode('electron');
 let electronApp = electron ? electron.ipcRenderer : null;
 
-import Sound from 'ms-environments/models/sound';
-import IntermittentSound from 'ms-environments/models/intermittent-sound';
+import Sound from 'ms-atmospherers/models/sound';
+import IntermittentSound from 'ms-atmospherers/models/intermittent-sound';
 
 export default Ember.Service.extend({
 

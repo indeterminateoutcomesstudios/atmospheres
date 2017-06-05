@@ -3,7 +3,7 @@ import fetch from 'fetch';
 
 let fs = window.requireNode('fs');
 
-import config from 'ms-environments/config/environment';
+import config from 'ms-atmospherers/config/environment';
 
 export default Ember.Object.extend({
 

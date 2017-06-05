@@ -1,7 +1,8 @@
 {
-  "name": "ms-environments",
+  "name": "ms-atmospherers",
+  "productName": "Atmospheres",
   "version": "0.0.0",
-  "description": "Small description for ms-environments goes here",
+  "description": "",
   "license": "MIT",
   "author": "",
   "directories": {
@@ -12,7 +13,8 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server --host 0.0.0.0 --port 1337",
-    "test": "ember test"
+    "test": "ember test",
+    "pkg": "rm -rf electron-out && ember electron:package"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
