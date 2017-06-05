@@ -17,10 +17,11 @@ export default Sound.extend({
       .then(promises => {
         let { context, gain, fadeGain } = this.getProperties('context', 'gain', 'fadeGain');
         gain.connect(destinationNode);
-        let { currentTime } = context;
+        let { currentTime } = context,
+            adjustedFadeTime = (1 - fadeGain.gain.value) * this.get('fadeInTime');
         fadeGain.gain
           .setValueAtTime(0, currentTime)
-          .linearRampToValueAtTime(1, currentTime + this.get('fadeTime'));
+          .linearRampToValueAtTime(1, currentTime + adjustedFadeTime);
         let buffers = promises.mapBy('value');
         this.set('playing', true);
         // TODO: There's some context fun to figure out here. `loop` is undefined
@@ -41,16 +42,18 @@ export default Sound.extend({
   },
 
   stop() {
-    let fadeGain = this.get('fadeGain');
-    let { currentTime } = this.get('context');
-    fadeGain.gain
+    let { gain } = this.get('fadeGain'),
+        { currentTime } = this.get('context'),
+        adjustedFadeTime = gain.value * this.get('fadeOutTime');
+    gain
+      .cancelScheduledValues(currentTime)
       .setValueAtTime(1, currentTime)
-      .linearRampToValueAtTime(0, currentTime + this.get('fadeTime'));
+      .exponentialRampToValueAtTime(0.001, currentTime + adjustedFadeTime);
     this.set('playing', false);
     Ember.run.later(() => this.get('playingSources').forEach(s => {
         s.stop();
         s.disconnect();
-      }), this.get('fadeTime') * 1000);
+      }), adjustedFadeTime * 1000);
   }
 
 });
